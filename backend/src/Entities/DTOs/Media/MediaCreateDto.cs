@@ -1,0 +1,15 @@
+﻿using src.Core.Utilities.Enums;
+
+namespace src.Entities.DTOs.Media;
+
+public class MediaCreateDto
+{
+    public string FileName {get; set;} = null!;
+    public string FilePath {get; set;} = null!;
+    public string FileType {get; set;} = MediaFileType.image.ToString();
+    public long FileSize {get; set;}
+    public int UserId {get; set;}
+    public int? PostId {get; set;}
+    public DateTime CreatedAt {get; set;} = DateTime.UtcNow;
+    public DateTime UpdatedAt {get; set;} = DateTime.UtcNow;
+}
