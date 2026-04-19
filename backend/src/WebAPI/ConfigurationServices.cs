@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Text;
 using Microsoft.OpenApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -26,27 +24,16 @@ public static class ConfigurationServices
                 BearerFormat = "JWT",
                 Description = "Enter the JWT token **without** the 'Bearer ' prefix.\n\nExample: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
             });
-
-            // Correct syntax for Swashbuckle 10+ / .NET 10
             options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
             {
                 [new OpenApiSecuritySchemeReference("Bearer", document)] = []
             });
-
             options.DocInclusionPredicate((docName, apiDesc) => true);
         });
         services.AddControllers();
-        // services.AddOpenApi();
-
-        // services.AddIdentity<AppUser, IdentityRole<int>>()
-        //     .AddRoles<IdentityRole<int>>()
-        //     .AddEntityFrameworkStores<SocialMediaDbContext>()
-        //     .AddDefaultTokenProviders()
-        //     .AddSignInManager();
         services.AddIdentity<AppUser, IdentityRole<int>>()
             .AddEntityFrameworkStores<SocialMediaDbContext>()
             .AddDefaultTokenProviders();
-        
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -54,7 +41,7 @@ public static class ConfigurationServices
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
-            var tokenOptions = configuration.GetSection("TokenOptions").Get<src.Entities.Concrete.Auth.TokenOptions>();
+            var tokenOptions = configuration.GetSection("TokenOptions").Get<Entities.Concrete.Auth.TokenOptions>();
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -73,11 +60,11 @@ public static class ConfigurationServices
         {
             options.AddPolicy("AllowAllOrigins", builder =>
             {
-                builder.AllowAnyOrigin()  // Allow all origins
-                    .AllowAnyMethod()  // Allow all HTTP methods (GET, POST, PUT, DELETE)
-                    .AllowAnyHeader(); // Allow all headers
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
             });
-        }); // Add CORS policy here
+        });
 
         return services;
     }

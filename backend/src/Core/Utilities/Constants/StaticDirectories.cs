@@ -8,7 +8,6 @@ namespace src.Core.Utilities.Constants;
 public static class StaticDirectories
 {
     public static string MediaFilesRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "");
-    // NOTE: fileName will contain file extension too, example, image.png
     
     public static string ReachToDefaultFiles(string fileName)
     {

@@ -23,12 +23,10 @@ class Program
 
         var app = builder.Build();
         app.UseStaticFiles();
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-            // app.MapOpenApi();
         }
         using (var scope = app.Services.CreateScope())
         {
@@ -36,7 +34,7 @@ class Program
             db.Database.Migrate();
         }
         app.UseRouting();
-        app.UseCors("AllowAllOrigins");  // Enable CORS with the policy
+        app.UseCors("AllowAllOrigins");
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();

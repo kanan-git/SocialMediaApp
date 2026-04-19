@@ -14,7 +14,6 @@ public interface IBaseRepository<TEntity>
     public Task AddAsync(TEntity entity);
     public void Update(TEntity entity);
     public void Remove(TEntity entity);
-    // public Task<int> SaveAsync();
     public IQueryable<TEntity> GetQuery(string[] includes);
     public Task<bool> IsExistEntity(Expression<Func<TEntity, bool>> filter);
 }

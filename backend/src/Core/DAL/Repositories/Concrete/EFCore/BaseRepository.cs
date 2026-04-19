@@ -20,8 +20,6 @@ public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity>
 
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null, params string[] includes)
     {
-        // IQueryable<Comment> query = _context.Comments;
-        // query = GetQuery(includes);
         var query = GetQuery(includes);
         return filter == null 
             ? await query.ToListAsync() 
@@ -56,11 +54,6 @@ public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity>
     {
         _context.Set<TEntity>().Remove(entity);
     }
-
-    // public async Task<int> SaveAsync()
-    // {
-    //     return await _context.SaveChangesAsync();
-    // }
 
     public IQueryable<TEntity> GetQuery(string[] includes)
     {

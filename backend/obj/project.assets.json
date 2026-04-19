@@ -5435,11 +5435,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\GitHub Projects\\(Portfolio)\\(1) Untitled Project\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\GitHub Projects\\(Portfolio)\\(1) Untitled Project\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\kanan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\GitHub Projects\\(Portfolio)\\(1) Untitled Project\\backend\\obj\\",
+      "outputPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

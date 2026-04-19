@@ -12,14 +12,6 @@ public class UnitOfWork : IUnitOfWork
     private readonly IMediaRepository _mediaRepo;
     private readonly IPostRepository _postRepo;
     private readonly IReactionRepository _reactionRepo;
-    // public UnitOfWork(SocialMediaDbContext context, ICommentRepository commentRepo, IMediaRepository mediaRepo, IPostRepository postRepo, IReactionRepository reactionRepo)
-    // {
-    //     _context = context;
-    //     _commentRepo = commentRepo;
-    //     _mediaRepo = mediaRepo;
-    //     _postRepo = postRepo;
-    //     _reactionRepo = reactionRepo;
-    // }
     public UnitOfWork(SocialMediaDbContext context)
     {
         _context = context;

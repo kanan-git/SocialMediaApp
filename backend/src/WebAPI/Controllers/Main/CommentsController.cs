@@ -23,12 +23,6 @@ public class CommentsController : ControllerBase
     public async Task<IActionResult> CreateNewComment(CommentCreateDto create)
     {
         var result = await _commentServices.CreateNewComment(create);
-        // try
-        // {}
-        // catch(Exception anyException)
-        // {
-        //     return BadRequest(anyException);
-        // }
         if(result.Success)
         {
             return Ok(new
