@@ -9,7 +9,7 @@ public class Comment : BaseEntity
     // main
     #region MAIN PROPERTIES
     public string Text {get; set;} = null!;
-    public string Type {get; set;} = CommentType.main.ToString();
+    public string Type {get; set;} = CommentType.main.ToString(); // business logic, if reply, cant accept reply, link to main commentid, on text, add selected reply sender user id @
     public string Visibility {get; set;} = VisibilityType.Public.ToString();
     #endregion
 

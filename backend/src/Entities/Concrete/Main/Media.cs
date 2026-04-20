@@ -7,7 +7,7 @@ namespace src.Entities.Concrete.Main;
 public class Media : BaseEntity
 {
     // main
-    public string FileName {get; set;} = null!;
+    public string FileName {get; set;} = null!; // must include file extension on config or service somehow, image doesnt work, must be image.png or image.jpg
     public string FilePath {get; set;} = null!;
     public string FileType {get; set;} = MediaFileType.image.ToString();
     public long FileSize {get; set;}

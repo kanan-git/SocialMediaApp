@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 
 using src.DataAccessLayer.UnitOfWork.Abstract;
 using src.Entities.Concrete.Main;
@@ -20,25 +22,60 @@ public class MediasController : ControllerBase
     }
 
     [HttpPost("upload")]
-    [Authorize(Roles="Admin,User")]
-    public async Task<IActionResult> Upload(IFormFile file, [FromForm] int userId)
+    [Authorize(Roles = "Admin,User")]
+    public async Task<IActionResult> Upload(
+        IFormFile file,
+        [FromForm] int userId,
+        [FromForm] string type // "profile" or "gallery"
+    )
     {
-        // ! uploads only profile image, fix gallery path, profile can have only, gallery isn't limited ! //
         if (file == null || file.Length == 0)
             return BadRequest("No file uploaded.");
+
+        var allowedExtensions = new[] { ".jpg", ".png", ".gif" };
         var fileExtension = Path.GetExtension(file.FileName).ToLower();
-        if (fileExtension != ".jpg" && fileExtension != ".png" && fileExtension != ".gif")
+
+        if (!allowedExtensions.Contains(fileExtension))
             return BadRequest("Invalid file type.");
-        var fileDirectory = Path.Combine(_env.WebRootPath, "users", userId.ToString(), "profile");
+
+        if (type != "profile" && type != "gallery")
+            return BadRequest("Invalid upload type.");
+
+        var userRoot = Path.Combine(_env.WebRootPath, "users", userId.ToString());
+        var targetFolder = type == "profile" ? "profile" : "gallery";
+        var fileDirectory = Path.Combine(userRoot, targetFolder);
+
         if (!Directory.Exists(fileDirectory))
             Directory.CreateDirectory(fileDirectory);
-        var fileName = "profile_image" + fileExtension;
-        var filePath = Path.Combine(fileDirectory, fileName);
-        using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+
+        string fileName;
+        string filePath;
+
+        if (type == "profile")
         {
-            await file.CopyToAsync(fileStream);
+            // 🔥 Ensure only ONE profile image exists
+            foreach (var existingFile in Directory.GetFiles(fileDirectory))
+            {
+                System.IO.File.Delete(existingFile);
+            }
+
+            fileName = "profile_image" + fileExtension;
+            filePath = Path.Combine(fileDirectory, fileName);
         }
-        var relativePath = Path.Combine("users", userId.ToString(), "profile", fileName);
+        else
+        {
+            // 🔥 Allow multiple files (unique names)
+            fileName = Guid.NewGuid().ToString() + fileExtension;
+            filePath = Path.Combine(fileDirectory, fileName);
+        }
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        var relativePath = Path.Combine("users", userId.ToString(), targetFolder, fileName);
+
         var fileRecord = new Media
         {
             FileName = fileName,
@@ -47,23 +84,50 @@ public class MediasController : ControllerBase
             FilePath = relativePath,
             UserId = userId
         };
+
         await _unitOfWork.MediaRepository.AddAsync(fileRecord);
         await _unitOfWork.SaveAsync();
+
         return Ok(new { filePath = relativePath });
     }
 
     [HttpGet("{fileId}")]
-    [Authorize(Roles="Admin,User")]
+    [Authorize(Roles = "Admin,User")]
     public async Task<IActionResult> Download(int fileId)
     {
         var fileRecord = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == fileId);
+
         if (fileRecord == null)
             return NotFound("File not found.");
-        var filePath = Path.Combine(_env.WebRootPath, fileRecord.FilePath);
-        if (!System.IO.File.Exists(filePath))
+
+        // 🔒 Enforce ownership (Admin can access all)
+        var currentUserIdClaim = User.FindFirst("sub")?.Value;
+
+        if (currentUserIdClaim == null)
+            return Unauthorized();
+
+        var currentUserId = int.Parse(currentUserIdClaim);
+        var isAdmin = User.IsInRole("Admin");
+
+        if (!isAdmin && fileRecord.UserId != currentUserId)
+            return Forbid();
+
+        var fullPath = Path.Combine(_env.WebRootPath, fileRecord.FilePath);
+
+        if (!System.IO.File.Exists(fullPath))
             return NotFound("File does not exist on the server.");
-        var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-        return File(fileStream, "application/octet-stream", fileRecord.FileName);
+
+        // ✅ Built-in content type resolver
+        var provider = new FileExtensionContentTypeProvider();
+
+        if (!provider.TryGetContentType(fullPath, out string contentType))
+        {
+            contentType = "application/octet-stream";
+        }
+
+        var stream = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+        return File(stream, contentType, fileRecord.FileName);
     }
 
     [HttpDelete("{fileId}")]
@@ -71,13 +135,34 @@ public class MediasController : ControllerBase
     public async Task<IActionResult> Remove(int fileId)
     {
         var fileRecord = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == fileId);
+
         if (fileRecord == null)
             return NotFound("File not found.");
-        var filePath = Path.Combine(_env.WebRootPath, fileRecord.FilePath);
-        if (System.IO.File.Exists(filePath))
-            System.IO.File.Delete(filePath);
+
+        // 🔒 Enforce ownership (Admin can delete any file)
+        var currentUserIdClaim = User.FindFirst("sub")?.Value;
+
+        if (currentUserIdClaim == null)
+            return Unauthorized();
+
+        var currentUserId = int.Parse(currentUserIdClaim);
+        var isAdmin = User.IsInRole("Admin");
+
+        if (!isAdmin && fileRecord.UserId != currentUserId)
+            return Forbid();
+
+        var fullPath = Path.Combine(_env.WebRootPath, fileRecord.FilePath);
+
+        // 🧹 Delete physical file if exists
+        if (System.IO.File.Exists(fullPath))
+        {
+            System.IO.File.Delete(fullPath);
+        }
+
+        // 🧹 Remove from database
         _unitOfWork.MediaRepository.Remove(fileRecord);
         await _unitOfWork.SaveAsync();
-        return Ok("File removed successfully.");
+
+        return Ok(new { message = "File removed successfully." });
     }
 }
