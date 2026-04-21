@@ -170,3 +170,15 @@ C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\GitHub Projects\(Portfolio
 C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\GitHub Projects\(Portfolio)\(1) Untitled Project\backend\obj\Debug\net10.0\backend.pdb
 C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\GitHub Projects\(Portfolio)\(1) Untitled Project\backend\obj\Debug\net10.0\backend.genruntimeconfig.cache
 C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\GitHub Projects\(Portfolio)\(1) Untitled Project\backend\obj\Debug\net10.0\ref\backend.dll
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.csproj.AssemblyReference.cache
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.AssemblyInfoInputs.cache
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.AssemblyInfo.cs
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.csproj.CoreCompileInputs.cache
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.sourcelink.json
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.dll
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\refint\backend.dll
+C:\Users\kanan\OneDrive\Desktop\Documentation\DESKTOP\Shared Public Git Projects\(1) Social Media App\backend\obj\Debug\net10.0\backend.pdb
