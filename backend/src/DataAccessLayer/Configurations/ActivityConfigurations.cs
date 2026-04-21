@@ -2,37 +2,30 @@ using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using src.Core.Utilities.Enums;
 using src.Entities.Concrete.Main;
 
 namespace src.DataAccessLayer.Configurations;
 
-public class PostConfigurations : IEntityTypeConfiguration<Post>
+public class ActivityConfigurations : IEntityTypeConfiguration<Activity>
 {
-    public void Configure(EntityTypeBuilder<Post> builder)
+    public void Configure(EntityTypeBuilder<Activity> builder)
     {
         // main
         builder.Property<int>("Id");
-        builder.Property(p => p.Text)
+        builder.Property(a => a.Category)
+            .HasMaxLength(32)
+            .HasColumnType(SqlDbType.NVarChar.ToString())
+            .IsRequired();
+        builder.Property(a => a.Description)
             .HasMaxLength(255)
-            .HasColumnType(SqlDbType.NVarChar.ToString())
+            .HasColumnType(SqlDbType.NVarChar.ToString());
+        builder.Property(a => a.UserId)
             .IsRequired();
-        builder.Property(p => p.Visibility)
-            .HasMaxLength(8)
-            .HasColumnType(SqlDbType.NVarChar.ToString())
-            .HasDefaultValue(VisibilityType.Public.ToString());
-        builder.Property(p => p.UserId)
-            .IsRequired();
-        builder.Property(p => p.HashtagId);
 
         // relational
-        builder.HasOne(p => p.User)
-            .WithMany(u => u.Posts)
-            .HasForeignKey(p => p.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
-        builder.HasMany(p => p.Reactions)
-            .WithOne(r => r.Post)
-            .HasForeignKey(r => r.PostId)
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(a => a.User)
+            .WithMany(u => u.Activities)
+            .HasForeignKey(a => a.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

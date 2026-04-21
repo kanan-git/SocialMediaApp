@@ -2,37 +2,31 @@ using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using src.Core.Utilities.Enums;
 using src.Entities.Concrete.Main;
 
 namespace src.DataAccessLayer.Configurations;
 
-public class PostConfigurations : IEntityTypeConfiguration<Post>
+public class CityConfigurations : IEntityTypeConfiguration<City>
 {
-    public void Configure(EntityTypeBuilder<Post> builder)
+    public void Configure(EntityTypeBuilder<City> builder)
     {
         // main
         builder.Property<int>("Id");
-        builder.Property(p => p.Text)
-            .HasMaxLength(255)
+        builder.Property(c => c.Name)
+            .HasMaxLength(32)
             .HasColumnType(SqlDbType.NVarChar.ToString())
             .IsRequired();
-        builder.Property(p => p.Visibility)
-            .HasMaxLength(8)
-            .HasColumnType(SqlDbType.NVarChar.ToString())
-            .HasDefaultValue(VisibilityType.Public.ToString());
-        builder.Property(p => p.UserId)
+        builder.Property(c => c.CountryId)
             .IsRequired();
-        builder.Property(p => p.HashtagId);
 
         // relational
-        builder.HasOne(p => p.User)
-            .WithMany(u => u.Posts)
-            .HasForeignKey(p => p.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
-        builder.HasMany(p => p.Reactions)
-            .WithOne(r => r.Post)
-            .HasForeignKey(r => r.PostId)
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(ci => ci.Country)
+            .WithMany(co => co.Cities)
+            .HasForeignKey(ci => ci.CountryId)
+            .OnDelete(DeleteBehavior.Cascade);
+        builder.HasMany(c => c.People)
+            .WithOne(u => u.City)
+            .HasForeignKey(u => u.CityId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

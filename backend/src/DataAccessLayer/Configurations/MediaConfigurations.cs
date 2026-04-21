@@ -27,9 +27,12 @@ public class MediaConfigurations : IEntityTypeConfiguration<Media>
             .HasDefaultValue(MediaFileType.image.ToString());
         builder.Property(m => m.FileSize)
             .IsRequired();
+        builder.Property(m => m.IsProfileImage)
+            .IsRequired();
         builder.Property(m => m.UserId)
             .IsRequired();
         builder.Property(m => m.PostId);
+        builder.Property(m => m.ChatId);
 
         // relational
         builder.HasOne(m => m.User)
@@ -40,5 +43,9 @@ public class MediaConfigurations : IEntityTypeConfiguration<Media>
             .WithMany(p => p.AttachedMediaFiles)
             .HasForeignKey(m => m.PostId)
             .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(m => m.Chat)
+            .WithMany(c => c.Gallery)
+            .HasForeignKey(m => m.ChatId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

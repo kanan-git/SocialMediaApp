@@ -2,37 +2,36 @@ using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using src.Core.Utilities.Enums;
 using src.Entities.Concrete.Main;
 
 namespace src.DataAccessLayer.Configurations;
 
-public class PostConfigurations : IEntityTypeConfiguration<Post>
+public class MessageConfigurations : IEntityTypeConfiguration<Message>
 {
-    public void Configure(EntityTypeBuilder<Post> builder)
+    public void Configure(EntityTypeBuilder<Message> builder)
     {
         // main
         builder.Property<int>("Id");
-        builder.Property(p => p.Text)
+        builder.Property(m => m.Text)
             .HasMaxLength(255)
             .HasColumnType(SqlDbType.NVarChar.ToString())
             .IsRequired();
-        builder.Property(p => p.Visibility)
-            .HasMaxLength(8)
-            .HasColumnType(SqlDbType.NVarChar.ToString())
-            .HasDefaultValue(VisibilityType.Public.ToString());
-        builder.Property(p => p.UserId)
+        builder.Property(m => m.IsRead)
+            .HasDefaultValue(false);
+        builder.Property(m => m.UserId)
             .IsRequired();
-        builder.Property(p => p.HashtagId);
+        builder.Property(m => m.ChatId)
+            .IsRequired();
+        builder.Property(m => m.AttachedMediaFileId);
 
         // relational
-        builder.HasOne(p => p.User)
-            .WithMany(u => u.Posts)
-            .HasForeignKey(p => p.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
-        builder.HasMany(p => p.Reactions)
-            .WithOne(r => r.Post)
-            .HasForeignKey(r => r.PostId)
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(m => m.User)
+            .WithMany(u => u.Messages)
+            .HasForeignKey(m => m.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(m => m.Chat)
+            .WithMany(c => c.Messages)
+            .HasForeignKey(m => m.ChatId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
