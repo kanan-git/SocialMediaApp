@@ -13,6 +13,7 @@ public class Post : BaseEntity
     // relational
     public int UserId {get; set;}
     public AppUser User {get; set;} = null!;
+    public ICollection<Hashtag>? Hashtags {get; set;} = new List<Hashtag>(0);
     public ICollection<Media>? AttachedMediaFiles {get; set;} = new List<Media>(0);
     public ICollection<Comment>? Comments {get; set;} = new List<Comment>(0);
     public ICollection<Reaction>? Reactions {get; set;} = new List<Reaction>(0);

@@ -25,15 +25,15 @@ public class MediaServices : IMediaServices
         var file = _mapper.Map<Media>(createDto);
         if(await _unitOfWork.MediaRepository.IsExistEntity(m => m.FileName == file.FileName))
         {
-            return new ErrorResult(ExceptionMessages.AlreadyExist);
+            return new ErrorResult(ResultMessages.AlreadyExist);
         }
         await _unitOfWork.MediaRepository.AddAsync(file);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Media created successfully.");
+        return new SuccessResult(ResultMessages.Created);
     }
 
     public async Task<IDataResult<List<MediaResponseDto>>> GetAllMedias()
@@ -42,7 +42,7 @@ public class MediaServices : IMediaServices
         var result = _mapper.Map<List<MediaResponseDto>>(files);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<MediaResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<MediaResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<MediaResponseDto>>(result);
     }
@@ -53,7 +53,7 @@ public class MediaServices : IMediaServices
         var result = _mapper.Map<List<MediaResponseDto>>(files);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<MediaResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<MediaResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<MediaResponseDto>>(result);
     }
@@ -64,7 +64,7 @@ public class MediaServices : IMediaServices
         var result = _mapper.Map<MediaResponseDto>(file);
         if(result == null)
         {
-            return new ErrorDataResult<MediaResponseDto>(result, "No match found!");
+            return new ErrorDataResult<MediaResponseDto>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<MediaResponseDto>(result);
     }
@@ -74,12 +74,12 @@ public class MediaServices : IMediaServices
         var file = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == id);
         if(file == null)
         {
-            return new ErrorResult("No match found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _mapper.Map(updateDto, file);
         _unitOfWork.MediaRepository.Update(file);
         await _unitOfWork.SaveAsync();
-        return new SuccessResult("Updated successfully.");
+        return new SuccessResult(ResultMessages.Updated);
     }
 
     public async Task<src.Core.Utilities.Result.Abstract.IResult> RemoveMedia(int id)
@@ -87,14 +87,14 @@ public class MediaServices : IMediaServices
         var delete = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == id);
         if(delete == null)
         {
-            return new ErrorResult("Not found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _unitOfWork.MediaRepository.Remove(delete);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Media removed.");
+        return new SuccessResult(ResultMessages.Removed);
     }
 }

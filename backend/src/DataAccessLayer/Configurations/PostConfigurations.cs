@@ -33,5 +33,7 @@ public class PostConfigurations : IEntityTypeConfiguration<Post>
             .WithOne(r => r.Post)
             .HasForeignKey(r => r.PostId)
             .OnDelete(DeleteBehavior.Restrict);
+        builder.HasMany(p => p.Hashtags)
+            .WithMany(h => h.Posts);
     }
 }

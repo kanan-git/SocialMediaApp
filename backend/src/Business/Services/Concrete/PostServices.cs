@@ -25,15 +25,15 @@ public class PostServices : IPostServices
         var post = _mapper.Map<Post>(createDto);
         if(await _unitOfWork.PostRepository.IsExistEntity(p => p.Text == post.Text))
         {
-            return new ErrorResult(ExceptionMessages.AlreadyExist);
+            return new ErrorResult(ResultMessages.AlreadyExist);
         }
         await _unitOfWork.PostRepository.AddAsync(post);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Post created successfully.");
+        return new SuccessResult(ResultMessages.Created);
     }
 
     public async Task<IDataResult<List<PostResponseDto>>> GetAllPosts()
@@ -42,7 +42,7 @@ public class PostServices : IPostServices
         var result = _mapper.Map<List<PostResponseDto>>(posts);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<PostResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<PostResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<PostResponseDto>>(result);
     }
@@ -53,7 +53,7 @@ public class PostServices : IPostServices
         var result = _mapper.Map<List<PostResponseDto>>(posts);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<PostResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<PostResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<PostResponseDto>>(result);
     }
@@ -64,7 +64,7 @@ public class PostServices : IPostServices
         var result = _mapper.Map<PostResponseDto>(post);
         if(result == null)
         {
-            return new ErrorDataResult<PostResponseDto>(result, "No match found!");
+            return new ErrorDataResult<PostResponseDto>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<PostResponseDto>(result);
     }
@@ -74,12 +74,12 @@ public class PostServices : IPostServices
         var post = await _unitOfWork.PostRepository.GetAsync(p => p.Id == id);
         if(post == null)
         {
-            return new ErrorResult("No match found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _mapper.Map(updateDto, post);
         _unitOfWork.PostRepository.Update(post);
         await _unitOfWork.SaveAsync();
-        return new SuccessResult("Updated successfully.");
+        return new SuccessResult(ResultMessages.Updated);
     }
 
     public async Task<src.Core.Utilities.Result.Abstract.IResult> RemovePost(int id)
@@ -87,14 +87,14 @@ public class PostServices : IPostServices
         var delete = await _unitOfWork.PostRepository.GetAsync(p => p.Id == id);
         if(delete == null)
         {
-            return new ErrorResult("Not found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _unitOfWork.PostRepository.Remove(delete);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Post removed.");
+        return new SuccessResult(ResultMessages.Removed);
     }
 }

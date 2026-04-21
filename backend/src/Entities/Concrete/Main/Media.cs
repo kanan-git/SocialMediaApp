@@ -11,10 +11,13 @@ public class Media : BaseEntity
     public string FilePath {get; set;} = null!;
     public string FileType {get; set;} = MediaFileType.image.ToString();
     public long FileSize {get; set;}
+    public bool IsProfileImage {get; set;}
 
     // relational
     public int UserId {get; set;}
     public AppUser User {get; set;} = null!;
     public int? PostId {get; set;}
     public Post? Post {get; set;}
+    public int? ChatId {get; set;}
+    public Chat? Chat {get; set;}
 }

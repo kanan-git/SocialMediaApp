@@ -25,15 +25,15 @@ public class CommentServices : ICommentServices
         var comment = _mapper.Map<Comment>(createDto);
         if(await _unitOfWork.CommentRepository.IsExistEntity(c => c.Text == comment.Text))
         {
-            return new ErrorResult(ExceptionMessages.AlreadyExist);
+            return new ErrorResult(ResultMessages.AlreadyExist);
         }
         await _unitOfWork.CommentRepository.AddAsync(comment);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Comment created successfully.");
+        return new SuccessResult(ResultMessages.Created);
     }
 
     public async Task<IDataResult<List<CommentResponseDto>>> GetAllComments()
@@ -42,7 +42,7 @@ public class CommentServices : ICommentServices
         var result = _mapper.Map<List<CommentResponseDto>>(comments);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<CommentResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<CommentResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<CommentResponseDto>>(result);
     }
@@ -53,7 +53,7 @@ public class CommentServices : ICommentServices
         var result = _mapper.Map<List<CommentResponseDto>>(comments);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<CommentResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<CommentResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<CommentResponseDto>>(result);
     }
@@ -64,7 +64,7 @@ public class CommentServices : ICommentServices
         var result = _mapper.Map<CommentResponseDto>(comment);
         if(result == null)
         {
-            return new ErrorDataResult<CommentResponseDto>(result, "No match found!");
+            return new ErrorDataResult<CommentResponseDto>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<CommentResponseDto>(result);
     }
@@ -74,12 +74,12 @@ public class CommentServices : ICommentServices
         var comment = await _unitOfWork.CommentRepository.GetAsync(c => c.Id == id);
         if(comment == null)
         {
-            return new ErrorResult("No match found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _mapper.Map(updateDto, comment);
         _unitOfWork.CommentRepository.Update(comment);
         await _unitOfWork.SaveAsync();
-        return new SuccessResult("Updated successfully.");
+        return new SuccessResult(ResultMessages.Updated);
     }
 
     public async Task<src.Core.Utilities.Result.Abstract.IResult> RemoveComment(int id)
@@ -88,7 +88,7 @@ public class CommentServices : ICommentServices
         var delete = await _unitOfWork.CommentRepository.GetAsync(c => c.Id == id);
         if(delete == null)
         {
-            return new ErrorResult("Not found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         var deleteReplies = await _unitOfWork.CommentRepository.GetAllAsync(c => c.TargetCommentId == id);
         if(deleteReplies.Count > 0)
@@ -110,8 +110,8 @@ public class CommentServices : ICommentServices
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Comment removed.");
+        return new SuccessResult(ResultMessages.Removed);
     }
 }

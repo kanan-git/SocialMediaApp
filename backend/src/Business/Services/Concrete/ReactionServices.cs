@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Result.Abstract;
 using src.Core.Utilities.Result.Concrete;
 using src.DataAccessLayer.UnitOfWork.Abstract;
@@ -26,9 +27,9 @@ public class ReactionServices : IReactionServices
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Reaction created successfully.");
+        return new SuccessResult(ResultMessages.Created);
     }
 
     public async Task<IDataResult<List<ReactionResponseDto>>> GetAllReactions()
@@ -37,7 +38,7 @@ public class ReactionServices : IReactionServices
         var result = _mapper.Map<List<ReactionResponseDto>>(reactions);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<ReactionResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<ReactionResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<ReactionResponseDto>>(result);
     }
@@ -48,7 +49,7 @@ public class ReactionServices : IReactionServices
         var result = _mapper.Map<List<ReactionResponseDto>>(reactions);
         if(result.Count == 0)
         {
-            return new ErrorDataResult<List<ReactionResponseDto>>(result, "No result found!");
+            return new ErrorDataResult<List<ReactionResponseDto>>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<List<ReactionResponseDto>>(result);
     }
@@ -59,7 +60,7 @@ public class ReactionServices : IReactionServices
         var result = _mapper.Map<ReactionResponseDto>(reaction);
         if(result == null)
         {
-            return new ErrorDataResult<ReactionResponseDto>(result, "No match found!");
+            return new ErrorDataResult<ReactionResponseDto>(result, ResultMessages.NoMatchFound);
         }
         return new SuccessDataResult<ReactionResponseDto>(result);
     }
@@ -69,12 +70,12 @@ public class ReactionServices : IReactionServices
         var reaction = await _unitOfWork.ReactionRepository.GetAsync(r => r.Id == id);
         if(reaction == null)
         {
-            return new ErrorResult("No match found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _mapper.Map(updateDto, reaction);
         _unitOfWork.ReactionRepository.Update(reaction);
         await _unitOfWork.SaveAsync();
-        return new SuccessResult("Updated successfully.");
+        return new SuccessResult(ResultMessages.Updated);
     }
 
     public async Task<src.Core.Utilities.Result.Abstract.IResult> RemoveReaction(int id)
@@ -82,14 +83,14 @@ public class ReactionServices : IReactionServices
         var delete = await _unitOfWork.ReactionRepository.GetAsync(r => r.Id == id);
         if(delete == null)
         {
-            return new ErrorResult("Not found!");
+            return new ErrorResult(ResultMessages.NoMatchFound);
         }
         _unitOfWork.ReactionRepository.Remove(delete);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)
         {
-            return new SuccessResult("Saved.");
+            return new SuccessResult(ResultMessages.Saved);
         }
-        return new SuccessResult("Reaction removed.");
+        return new SuccessResult(ResultMessages.Removed);
     }
 }

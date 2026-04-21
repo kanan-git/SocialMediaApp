@@ -4,7 +4,7 @@ namespace src.Core.Utilities.Exceptions;
 
 public class AlreadyExistException : Exception
 {
-    public AlreadyExistException() : base(ExceptionMessages.AlreadyExist)
+    public AlreadyExistException() : base(ResultMessages.AlreadyExist)
     {}
     public AlreadyExistException(string message) : base(message)
     {}

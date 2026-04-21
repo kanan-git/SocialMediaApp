@@ -8,8 +8,10 @@ public class MediaCreateDto
     public string FilePath {get; set;} = null!;
     public string FileType {get; set;} = MediaFileType.image.ToString();
     public long FileSize {get; set;}
+    public bool IsProfileImage {get; set;}
     public int UserId {get; set;}
     public int? PostId {get; set;}
+    public int? ChatId {get; set;}
     public DateTime CreatedAt {get; set;} = DateTime.UtcNow;
     public DateTime UpdatedAt {get; set;} = DateTime.UtcNow;
 }

@@ -21,6 +21,13 @@ public static class ConfigurationServices
         services.AddScoped<IPostServices, PostServices>();
         services.AddScoped<IMediaServices, MediaServices>();
         services.AddScoped<IReactionServices, ReactionServices>();
+        services.AddScoped<IActivityServices, ActivityServices>();
+        services.AddScoped<IChatServices, ChatServices>();
+        services.AddScoped<ICityServices, CityServices>();
+        services.AddScoped<ICountryServices, CountryServices>();
+        services.AddScoped<IHashtagServices, HashtagServices>();
+        services.AddScoped<IMessageServices, MessageServices>();
+        services.AddScoped<INotificationServices, NotificationServices>();
         return services;
     }
 }
