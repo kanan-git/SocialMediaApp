@@ -33,5 +33,9 @@ public class MessageConfigurations : IEntityTypeConfiguration<Message>
             .WithMany(c => c.Messages)
             .HasForeignKey(m => m.ChatId)
             .OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(msg => msg.AttachedMediaFile)
+            .WithMany(media => media.Messages)
+            .HasForeignKey(msg => msg.AttachedMediaFileId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

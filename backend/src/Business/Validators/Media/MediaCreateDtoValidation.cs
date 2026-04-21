@@ -19,8 +19,11 @@ public class MediaCreateDtoValidation : AbstractValidator<MediaCreateDto>
             .MaximumLength(16).WithMessage(ValidationErrorMessages.MaxSymbolMessage(16));
         RuleFor(m => m.FileSize)
             .NotNull().WithMessage(ValidationErrorMessages.NotNullFieldMessage());
+        RuleFor(m => m.IsProfileImage)
+            .NotNull().WithMessage(ValidationErrorMessages.NotNullFieldMessage());
         RuleFor(m => m.UserId)
             .NotNull().WithMessage(ValidationErrorMessages.NotNullFieldMessage());
         RuleFor(m => m.PostId);
+        RuleFor(m => m.ChatId);
     }
 }

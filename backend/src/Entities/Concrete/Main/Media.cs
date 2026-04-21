@@ -20,4 +20,5 @@ public class Media : BaseEntity
     public Post? Post {get; set;}
     public int? ChatId {get; set;}
     public Chat? Chat {get; set;}
+    public ICollection<Message> Messages {get; set;} = new List<Message>(0);
 }
