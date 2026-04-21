@@ -27,6 +27,6 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
         builder.HasMany(c => c.People)
             .WithOne(u => u.City)
             .HasForeignKey(u => u.CityId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
