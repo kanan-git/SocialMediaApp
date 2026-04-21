@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
+using src.Business.Services.Abstract;
 using src.DataAccessLayer.UnitOfWork.Abstract;
 using src.Entities.Concrete.Main;
+using src.Entities.DTOs.Media;
 
 namespace src.WebAPI.Controllers.Main;
 
@@ -13,12 +15,14 @@ namespace src.WebAPI.Controllers.Main;
 [ApiController]
 public class MediasController : ControllerBase
 {
-    private readonly IUnitOfWork _unitOfWork;
+    // private readonly IUnitOfWork _unitOfWork;
     private readonly IWebHostEnvironment _env;
-    public MediasController(IUnitOfWork unitOfWork, IWebHostEnvironment env)
+    private readonly IMediaServices _mediaServices;
+    public MediasController(IUnitOfWork unitOfWork, IWebHostEnvironment env, IMediaServices mediaServices)
     {
-        _unitOfWork = unitOfWork;
+        // _unitOfWork = unitOfWork;
         _env = env;
+        _mediaServices = mediaServices;
     }
 
     [HttpPost("upload")]
@@ -76,7 +80,7 @@ public class MediasController : ControllerBase
 
         var relativePath = Path.Combine("users", userId.ToString(), targetFolder, fileName);
 
-        var fileRecord = new Media
+        var fileRecord = new MediaCreateDto
         {
             FileName = fileName,
             FileType = "image",
@@ -85,8 +89,8 @@ public class MediasController : ControllerBase
             UserId = userId
         };
 
-        await _unitOfWork.MediaRepository.AddAsync(fileRecord);
-        await _unitOfWork.SaveAsync();
+        await _mediaServices.CreateNewMedia(fileRecord);
+        // await _unitOfWork.SaveAsync();
 
         return Ok(new { filePath = relativePath });
     }
@@ -95,7 +99,7 @@ public class MediasController : ControllerBase
     [Authorize(Roles = "Admin,User")]
     public async Task<IActionResult> Download(int fileId)
     {
-        var fileRecord = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == fileId);
+        var fileRecord = await _mediaServices.GetMediaById(fileId);
 
         if (fileRecord == null)
             return NotFound("File not found.");
@@ -109,10 +113,10 @@ public class MediasController : ControllerBase
         var currentUserId = int.Parse(currentUserIdClaim);
         var isAdmin = User.IsInRole("Admin");
 
-        if (!isAdmin && fileRecord.UserId != currentUserId)
+        if (!isAdmin && fileRecord.Data.UserId != currentUserId)
             return Forbid();
 
-        var fullPath = Path.Combine(_env.WebRootPath, fileRecord.FilePath);
+        var fullPath = Path.Combine(_env.WebRootPath, fileRecord.Data.FilePath);
 
         if (!System.IO.File.Exists(fullPath))
             return NotFound("File does not exist on the server.");
@@ -127,14 +131,14 @@ public class MediasController : ControllerBase
 
         var stream = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-        return File(stream, contentType, fileRecord.FileName);
+        return File(stream, contentType, fileRecord.Data.FileName);
     }
 
     [HttpDelete("{fileId}")]
     [Authorize(Roles = "Admin,User")]
     public async Task<IActionResult> Remove(int fileId)
     {
-        var fileRecord = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == fileId);
+        var fileRecord = await _mediaServices.GetMediaById(fileId);
 
         if (fileRecord == null)
             return NotFound("File not found.");
@@ -148,10 +152,10 @@ public class MediasController : ControllerBase
         var currentUserId = int.Parse(currentUserIdClaim);
         var isAdmin = User.IsInRole("Admin");
 
-        if (!isAdmin && fileRecord.UserId != currentUserId)
+        if (!isAdmin && fileRecord.Data.UserId != currentUserId)
             return Forbid();
 
-        var fullPath = Path.Combine(_env.WebRootPath, fileRecord.FilePath);
+        var fullPath = Path.Combine(_env.WebRootPath, fileRecord.Data.FilePath);
 
         // 🧹 Delete physical file if exists
         if (System.IO.File.Exists(fullPath))
@@ -160,8 +164,8 @@ public class MediasController : ControllerBase
         }
 
         // 🧹 Remove from database
-        _unitOfWork.MediaRepository.Remove(fileRecord);
-        await _unitOfWork.SaveAsync();
+        _mediaServices.RemoveMedia(fileRecord.Data.Id);
+        // await _unitOfWork.SaveAsync();
 
         return Ok(new { message = "File removed successfully." });
     }
