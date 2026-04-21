@@ -10,11 +10,17 @@ public static class ResultMessages
 
     // other
     public static string Saved = "Changes Successfully saved.";
+
+    // authorization
+    public static string Logged = "Successfully logged in.";
     #endregion
 
     #region Error_Messages
     // contents
     public static string AlreadyExist = "Already exist!";
     public static string NoMatchFound = "No match found!";
+
+    // authorization
+    public static string Unauthorized = "Unauthorization! You have no permission.";
     #endregion
 }

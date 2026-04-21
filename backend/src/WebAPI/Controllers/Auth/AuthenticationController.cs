@@ -1,14 +1,18 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using AutoMapper;
+using System.Text;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
+using src.Core.Utilities.Constants;
 using src.Entities.Concrete.Auth;
 using src.Entities.DTOs.Authentication;
+using src.Business.Services.Abstract;
+using src.Entities.DTOs.Activity;
+using src.Core.Utilities.Enums;
 
 namespace src.WebAPI.Controllers.Auth;
 
@@ -21,13 +25,21 @@ public class AuthenticationController : ControllerBase
     private readonly IMapper _mapper;
     private readonly IConfiguration _configuration;
     private readonly src.Entities.Concrete.Auth.TokenOptions _tokenOptions;
-    public AuthenticationController(UserManager<AppUser> userManager, RoleManager<IdentityRole<int>> roleManager, IMapper mapper, IConfiguration configuration)
+    private readonly IActivityServices _activityServices;
+    public AuthenticationController(
+        UserManager<AppUser> userManager, 
+        RoleManager<IdentityRole<int>> roleManager, 
+        IMapper mapper, 
+        IConfiguration configuration,
+        IActivityServices activityServices
+    )
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _mapper = mapper;
         _configuration = configuration;
         _tokenOptions = configuration.GetSection("TokenOptions").Get<src.Entities.Concrete.Auth.TokenOptions>();
+        _activityServices = activityServices;
     }
 
     [HttpPost]
@@ -36,12 +48,20 @@ public class AuthenticationController : ControllerBase
         var user = await _userManager.FindByNameAsync(login.UserName);
         if(user == null)
         {
-            return NotFound(); // use Result Pattern
+            return NotFound(new
+            {
+                Success = false,
+                Message = ResultMessages.NoMatchFound
+            });
         }
 
         if(! await _userManager.CheckPasswordAsync(user, login.Password))
         {
-            return Unauthorized(); // use Result Pattern
+            return Unauthorized(new
+            {
+                Success = false,
+                Message = ResultMessages.Unauthorized
+            });
         }
         
         SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.SecurityKey));
@@ -70,11 +90,23 @@ public class AuthenticationController : ControllerBase
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
         string jwt = tokenHandler.WriteToken(token);
 
-        return Ok(new // use Result Pattern
+        var activity = new ActivityCreateDto()
         {
-            Code = 200,
-            Token = jwt,
-            Expires = DateTime.UtcNow.AddHours(_tokenOptions.AccessTokenExpiration)
+            Category = ActivityCategories.auth_login.ToString()
+            // Description
+            // UserId
+        };
+        await _activityServices.CreateNewActivity(activity);
+
+        return Ok(new
+        {
+            Data = new {
+                Code = 200,
+                Token = jwt,
+                Expires = DateTime.UtcNow.AddHours(_tokenOptions.AccessTokenExpiration)
+            },
+            Success = true,
+            Message = ResultMessages.Logged
         });
     }
     
