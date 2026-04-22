@@ -48,20 +48,12 @@ public class AuthenticationController : ControllerBase
         var user = await _userManager.FindByNameAsync(login.UserName);
         if(user == null)
         {
-            return NotFound(new
-            {
-                Success = false,
-                Message = ResultMessages.NoMatchFound
-            });
+            return NotFound(ControllerReturn.Return<string>(success:false, msg:ResultMessages.NoMatchFound));
         }
 
         if(! await _userManager.CheckPasswordAsync(user, login.Password))
         {
-            return Unauthorized(new
-            {
-                Success = false,
-                Message = ResultMessages.Unauthorized
-            });
+            return Unauthorized(ControllerReturn.Return<string>(success:false, msg:ResultMessages.Unauthorized));
         }
         
         SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.SecurityKey));
@@ -92,22 +84,17 @@ public class AuthenticationController : ControllerBase
 
         var activity = new ActivityCreateDto()
         {
-            Category = ActivityCategories.auth_login.ToString()
-            // Description
-            // UserId
+            Category = ActivityCategories.auth_login.ToString(),
+            Description = ResultMessages.Logged.ToString(),
+            UserId = user.Id
         };
         await _activityServices.CreateNewActivity(activity);
 
-        return Ok(new
-        {
-            Data = new {
-                Code = 200,
-                Token = jwt,
-                Expires = DateTime.UtcNow.AddHours(_tokenOptions.AccessTokenExpiration)
-            },
-            Success = true,
-            Message = ResultMessages.Logged
-        });
+        return Ok(ControllerReturn.ReturnData<dynamic,string>(
+            data: new {Code=200, Token=jwt, Expires=DateTime.UtcNow.AddHours(_tokenOptions.AccessTokenExpiration)},
+            success: true,
+            msg: ResultMessages.Logged
+        ));
     }
     
     [HttpPost]
@@ -118,10 +105,7 @@ public class AuthenticationController : ControllerBase
         var addedUser = await _userManager.CreateAsync(user, register.Password);
         if(!addedUser.Succeeded)
         {
-            return BadRequest(new { // use Result Pattern
-                Errors = addedUser.Errors,
-                Code = 400
-            });
+            return BadRequest(ControllerReturn.Return<dynamic>(success:false, msg:addedUser.Errors));
         }
 
         string newRoleName = "User";
@@ -130,15 +114,20 @@ public class AuthenticationController : ControllerBase
             var addedRole = await _roleManager.CreateAsync(new IdentityRole<int>(newRoleName));
             if(!addedRole.Succeeded)
             {
-                return BadRequest(new { // use Result Pattern
-                    Errors = addedRole.Errors,
-                    Code = 400
-                });
+                return BadRequest(ControllerReturn.Return<dynamic>(success:false, msg:addedRole.Errors));
             }
         }
 
-        await _userManager.AddToRoleAsync(user,newRoleName);
+        await _userManager.AddToRoleAsync(user, newRoleName);
 
-        return Ok("Successfully registered!"); // use Result Pattern
+        var activity = new ActivityCreateDto()
+        {
+            Category = ActivityCategories.auth_register.ToString(),
+            Description = $"{newRoleName} ID:{user.Id} successfully registered.",
+            UserId = user.Id
+        };
+        await _activityServices.CreateNewActivity(activity);
+
+        return Ok(ControllerReturn.Return<string>(success: true, msg: ResultMessages.Registered));
     }
 }

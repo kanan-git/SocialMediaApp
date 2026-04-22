@@ -13,6 +13,7 @@ public static class ResultMessages
 
     // authorization
     public static string Logged = "Successfully logged in.";
+    public static string Registered = "Successfully registered.";
     #endregion
 
     #region Error_Messages
