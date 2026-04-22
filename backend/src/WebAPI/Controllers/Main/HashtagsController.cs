@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.Hashtag;
 
@@ -25,17 +26,9 @@ public class HashtagsController : ControllerBase
         var result = await _hashtagServices.CreateNewHashtag(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +37,9 @@ public class HashtagsController : ControllerBase
         var hashtags = await _hashtagServices.GetAllHashtags();
         if(hashtags.Success)
         {
-            return Ok(new
-            {
-                Success = hashtags.Success,
-                Message = hashtags.Message,
-                Data = hashtags.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:hashtags.Data, success:hashtags.Success, msg:hashtags.Message));
         }
-        return BadRequest(new
-        {
-            Success = hashtags.Success,
-            Message = hashtags.Message,
-            Data = hashtags.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:hashtags.Data, success:hashtags.Success, msg:hashtags.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +48,9 @@ public class HashtagsController : ControllerBase
         var hashtags = await _hashtagServices.GetAllHashtagsPaginated(page, size);
         if(hashtags.Success)
         {
-            return Ok(new
-            {
-                Success = hashtags.Success,
-                Message = hashtags.Message,
-                Data = hashtags.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:hashtags.Data, success:hashtags.Success, msg:hashtags.Message));
         }
-        return BadRequest(new
-        {
-            Success = hashtags.Success,
-            Message = hashtags.Message,
-            Data = hashtags.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:hashtags.Data, success:hashtags.Success, msg:hashtags.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +59,9 @@ public class HashtagsController : ControllerBase
         var data = await _hashtagServices.GetHashtagById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +71,9 @@ public class HashtagsController : ControllerBase
         var result = await _hashtagServices.UpdateHashtag(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +83,8 @@ public class HashtagsController : ControllerBase
         var result = await _hashtagServices.RemoveHashtag(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }

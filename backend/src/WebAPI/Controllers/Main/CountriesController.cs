@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.Country;
 
@@ -25,17 +26,9 @@ public class CountriesController : ControllerBase
         var result = await _countryServices.CreateNewCountry(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +37,9 @@ public class CountriesController : ControllerBase
         var countries = await _countryServices.GetAllCountries();
         if(countries.Success)
         {
-            return Ok(new
-            {
-                Success = countries.Success,
-                Message = countries.Message,
-                Data = countries.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:countries.Data, success:countries.Success, msg:countries.Message));
         }
-        return BadRequest(new
-        {
-            Success = countries.Success,
-            Message = countries.Message,
-            Data = countries.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:countries.Data, success:countries.Success, msg:countries.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +48,9 @@ public class CountriesController : ControllerBase
         var countries = await _countryServices.GetAllCountriesPaginated(page, size);
         if(countries.Success)
         {
-            return Ok(new
-            {
-                Success = countries.Success,
-                Message = countries.Message,
-                Data = countries.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:countries.Data, success:countries.Success, msg:countries.Message));
         }
-        return BadRequest(new
-        {
-            Success = countries.Success,
-            Message = countries.Message,
-            Data = countries.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:countries.Data, success:countries.Success, msg:countries.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +59,9 @@ public class CountriesController : ControllerBase
         var data = await _countryServices.GetCountryById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +71,9 @@ public class CountriesController : ControllerBase
         var result = await _countryServices.UpdateCountry(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +83,8 @@ public class CountriesController : ControllerBase
         var result = await _countryServices.RemoveCountry(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }

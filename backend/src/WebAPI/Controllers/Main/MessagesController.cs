@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.Message;
 
@@ -13,29 +14,38 @@ namespace src.WebAPI.Controllers.Main;
 public class MessagesController : ControllerBase
 {
     private readonly IMessageServices _messageServices;
-    public MessagesController(IMessageServices messageServices)
+    private readonly INotificationServices _notificationServices;
+    public MessagesController(IMessageServices messageServices, INotificationServices notificationServices)
     {
         _messageServices = messageServices;
+        _notificationServices = notificationServices;
     }
 
     [HttpPost]
     [Authorize(Roles="Admin,User")]
     public async Task<IActionResult> CreateNewMessage(MessageCreateDto create)
     {
+        // var activity = new ActivityCreateDto()
+        // {
+        //     // Category = ActivityCategories..ToString(),
+        //     // Description = $"",
+        //     // UserId = create.UserId
+        // };
+        // await _activityServices.CreateNewActivity(activity);
+        // var notification = new NotificationCreateDto()
+        // {
+        //     // Type = NotificationType..ToString(),
+        //     // Description = $"",
+        //     // IsRead = false,
+        //     // ReceiverUserId = 
+        // };
+        // await _notificationServices.CreateNewNotification(notification);
         var result = await _messageServices.CreateNewMessage(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +54,9 @@ public class MessagesController : ControllerBase
         var messages = await _messageServices.GetAllMessages();
         if(messages.Success)
         {
-            return Ok(new
-            {
-                Success = messages.Success,
-                Message = messages.Message,
-                Data = messages.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:messages.Data, success:messages.Success, msg:messages.Message));
         }
-        return BadRequest(new
-        {
-            Success = messages.Success,
-            Message = messages.Message,
-            Data = messages.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:messages.Data, success:messages.Success, msg:messages.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +65,9 @@ public class MessagesController : ControllerBase
         var messages = await _messageServices.GetAllMessagesPaginated(page, size);
         if(messages.Success)
         {
-            return Ok(new
-            {
-                Success = messages.Success,
-                Message = messages.Message,
-                Data = messages.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:messages.Data, success:messages.Success, msg:messages.Message));
         }
-        return BadRequest(new
-        {
-            Success = messages.Success,
-            Message = messages.Message,
-            Data = messages.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:messages.Data, success:messages.Success, msg:messages.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +76,9 @@ public class MessagesController : ControllerBase
         var data = await _messageServices.GetMessageById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +88,9 @@ public class MessagesController : ControllerBase
         var result = await _messageServices.UpdateMessage(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +100,8 @@ public class MessagesController : ControllerBase
         var result = await _messageServices.RemoveMessage(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }

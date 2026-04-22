@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Entities.DTOs.Post;
 
 namespace src.WebAPI.Controllers.Main;
@@ -12,29 +13,40 @@ namespace src.WebAPI.Controllers.Main;
 public class PostsController : ControllerBase
 {
     private readonly IPostServices _postServices;
-    public PostsController(IPostServices postServices)
+    private readonly IActivityServices _activityServices;
+    private readonly INotificationServices _notificationServices;
+    public PostsController(IPostServices postServices, IActivityServices activityServices, INotificationServices notificationServices)
     {
         _postServices = postServices;
+        _activityServices = activityServices;
+        _notificationServices = notificationServices;
     }
 
     [HttpPost]
     [Authorize(Roles="Admin,User")]
     public async Task<IActionResult> CreateNewPost(PostCreateDto create)
     {
+        // var activity = new ActivityCreateDto()
+        // {
+        //     // Category = ActivityCategories..ToString(),
+        //     // Description = $"",
+        //     // UserId = create.UserId
+        // };
+        // await _activityServices.CreateNewActivity(activity);
+        // var notification = new NotificationCreateDto()
+        // {
+        //     // Type = NotificationType..ToString(),
+        //     // Description = $"",
+        //     // IsRead = false,
+        //     // ReceiverUserId = 
+        // };
+        // await _notificationServices.CreateNewNotification(notification);
         var result = await _postServices.CreateNewPost(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -43,19 +55,9 @@ public class PostsController : ControllerBase
         var posts = await _postServices.GetAllPosts();
         if(posts.Success)
         {
-            return Ok(new
-            {
-                Success = posts.Success,
-                Message = posts.Message,
-                Data = posts.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:posts.Data, success:posts.Success, msg:posts.Message));
         }
-        return BadRequest(new
-        {
-            Success = posts.Success,
-            Message = posts.Message,
-            Data = posts.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:posts.Data, success:posts.Success, msg:posts.Message));
     }
 
     [HttpGet("{page}")]
@@ -64,19 +66,9 @@ public class PostsController : ControllerBase
         var posts = await _postServices.GetAllPostsPaginated(page, size);
         if(posts.Success)
         {
-            return Ok(new
-            {
-                Success = posts.Success,
-                Message = posts.Message,
-                Data = posts.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:posts.Data, success:posts.Success, msg:posts.Message));
         }
-        return BadRequest(new
-        {
-            Success = posts.Success,
-            Message = posts.Message,
-            Data = posts.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:posts.Data, success:posts.Success, msg:posts.Message));
     }
 
     [HttpGet("{id}")]
@@ -85,19 +77,9 @@ public class PostsController : ControllerBase
         var data = await _postServices.GetPostById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -107,17 +89,9 @@ public class PostsController : ControllerBase
         var result = await _postServices.UpdatePost(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -127,16 +101,8 @@ public class PostsController : ControllerBase
         var result = await _postServices.RemovePost(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }

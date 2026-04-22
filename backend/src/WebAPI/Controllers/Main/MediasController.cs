@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.DataAccessLayer.UnitOfWork.Abstract;
 using src.Entities.Concrete.Main;
 using src.Entities.DTOs.Media;
@@ -18,11 +19,13 @@ public class MediasController : ControllerBase
     // private readonly IUnitOfWork _unitOfWork;
     private readonly IWebHostEnvironment _env;
     private readonly IMediaServices _mediaServices;
-    public MediasController(IUnitOfWork unitOfWork, IWebHostEnvironment env, IMediaServices mediaServices)
+    private readonly IActivityServices _activityServices;
+    public MediasController(IUnitOfWork unitOfWork, IWebHostEnvironment env, IMediaServices mediaServices, IActivityServices activityServices)
     {
         // _unitOfWork = unitOfWork;
         _env = env;
         _mediaServices = mediaServices;
+        _activityServices = activityServices;
     }
 
     [HttpPost("upload")]
@@ -33,17 +36,32 @@ public class MediasController : ControllerBase
         [FromForm] string type // "profile" or "gallery"
     )
     {
+        // var activity = new ActivityCreateDto()
+        // {
+        //     // Category = ActivityCategories..ToString(),
+        //     // Description = $"",
+        //     // UserId = create.UserId
+        // };
+        // await _activityServices.CreateNewActivity(activity);
+        // var notification = new NotificationCreateDto()
+        // {
+        //     // Type = NotificationType..ToString(),
+        //     // Description = $"",
+        //     // IsRead = false,
+        //     // ReceiverUserId = 
+        // };
+        // await _notificationServices.CreateNewNotification(notification);
         if (file == null || file.Length == 0)
-            return BadRequest("No file uploaded.");
+            return BadRequest(ControllerReturn.Return<string>(success:false, msg:"No file uploaded."));
 
         var allowedExtensions = new[] { ".jpg", ".png", ".gif" };
         var fileExtension = Path.GetExtension(file.FileName).ToLower();
 
         if (!allowedExtensions.Contains(fileExtension))
-            return BadRequest("Invalid file type.");
+            return BadRequest(ControllerReturn.Return<string>(success:false, msg:"Invalid file type."));
 
         if (type != "profile" && type != "gallery")
-            return BadRequest("Invalid upload type.");
+            return BadRequest(ControllerReturn.Return<string>(success:false, msg:"Invalid upload type."));
 
         var userRoot = Path.Combine(_env.WebRootPath, "users", userId.ToString());
         var targetFolder = type == "profile" ? "profile" : "gallery";
@@ -92,7 +110,7 @@ public class MediasController : ControllerBase
         await _mediaServices.CreateNewMedia(fileRecord);
         // await _unitOfWork.SaveAsync();
 
-        return Ok(new { filePath = relativePath });
+        return Ok(ControllerReturn.ReturnData<dynamic,string>(data:new{filePath=relativePath}, success:true, msg:""));
     }
 
     [HttpGet("{fileId}")]
@@ -102,24 +120,24 @@ public class MediasController : ControllerBase
         var fileRecord = await _mediaServices.GetMediaById(fileId);
 
         if (fileRecord == null)
-            return NotFound("File not found.");
+            return NotFound(ControllerReturn.Return<string>(success:false, msg:"File not found."));
 
         // 🔒 Enforce ownership (Admin can access all)
         var currentUserIdClaim = User.FindFirst("sub")?.Value;
 
         if (currentUserIdClaim == null)
-            return Unauthorized();
+            return Unauthorized(ControllerReturn.Return<string>(success:false, msg:ResultMessages.Unauthorized));
 
         var currentUserId = int.Parse(currentUserIdClaim);
         var isAdmin = User.IsInRole("Admin");
 
         if (!isAdmin && fileRecord.Data.UserId != currentUserId)
-            return Forbid();
+            return Forbid(ControllerReturn.Return(success:false, msg:"Forbidden!"));
 
         var fullPath = Path.Combine(_env.WebRootPath, fileRecord.Data.FilePath);
 
         if (!System.IO.File.Exists(fullPath))
-            return NotFound("File does not exist on the server.");
+            return NotFound(ControllerReturn.Return<string>(success:false, msg:"File does not exist on the server."));
 
         // ✅ Built-in content type resolver
         var provider = new FileExtensionContentTypeProvider();
@@ -131,6 +149,7 @@ public class MediasController : ControllerBase
 
         var stream = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
+        // ControllerReturn.Return<>(success:, msg:)
         return File(stream, contentType, fileRecord.Data.FileName);
     }
 
@@ -141,19 +160,19 @@ public class MediasController : ControllerBase
         var fileRecord = await _mediaServices.GetMediaById(fileId);
 
         if (fileRecord == null)
-            return NotFound("File not found.");
+            return NotFound(ControllerReturn.Return(success:false, msg:"File not found."));
 
         // 🔒 Enforce ownership (Admin can delete any file)
         var currentUserIdClaim = User.FindFirst("sub")?.Value;
 
         if (currentUserIdClaim == null)
-            return Unauthorized();
+            return Unauthorized(ControllerReturn.Return(success:false, msg:ResultMessages.Unauthorized));
 
         var currentUserId = int.Parse(currentUserIdClaim);
         var isAdmin = User.IsInRole("Admin");
 
         if (!isAdmin && fileRecord.Data.UserId != currentUserId)
-            return Forbid();
+            return Forbid(ControllerReturn.Return(success:false, msg:"Forbidden!"));
 
         var fullPath = Path.Combine(_env.WebRootPath, fileRecord.Data.FilePath);
 
@@ -167,6 +186,6 @@ public class MediasController : ControllerBase
         _mediaServices.RemoveMedia(fileRecord.Data.Id);
         // await _unitOfWork.SaveAsync();
 
-        return Ok(new { message = "File removed successfully." });
+        return Ok(ControllerReturn.Return(success:true, msg:"File removed successfully."));
     }
 }

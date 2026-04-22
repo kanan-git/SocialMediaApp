@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.Chat;
 
@@ -25,17 +26,9 @@ public class ChatsController : ControllerBase
         var result = await _chatServices.CreateNewChat(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +37,9 @@ public class ChatsController : ControllerBase
         var chats = await _chatServices.GetAllChats();
         if(chats.Success)
         {
-            return Ok(new
-            {
-                Success = chats.Success,
-                Message = chats.Message,
-                Data = chats.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:chats.Data, success:chats.Success, msg:chats.Message));
         }
-        return BadRequest(new
-        {
-            Success = chats.Success,
-            Message = chats.Message,
-            Data = chats.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:chats.Data, success:chats.Success, msg:chats.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +48,9 @@ public class ChatsController : ControllerBase
         var chats = await _chatServices.GetAllChatsPaginated(page, size);
         if(chats.Success)
         {
-            return Ok(new
-            {
-                Success = chats.Success,
-                Message = chats.Message,
-                Data = chats.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:chats.Data, success:chats.Success, msg:chats.Message));
         }
-        return BadRequest(new
-        {
-            Success = chats.Success,
-            Message = chats.Message,
-            Data = chats.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:chats.Data, success:chats.Success, msg:chats.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +59,9 @@ public class ChatsController : ControllerBase
         var data = await _chatServices.GetChatById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +71,9 @@ public class ChatsController : ControllerBase
         var result = await _chatServices.UpdateChat(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +83,8 @@ public class ChatsController : ControllerBase
         var result = await _chatServices.RemoveChat(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.City;
 
@@ -25,17 +26,9 @@ public class CitiesController : ControllerBase
         var result = await _cityServices.CreateNewCity(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +37,9 @@ public class CitiesController : ControllerBase
         var cities = await _cityServices.GetAllCities();
         if(cities.Success)
         {
-            return Ok(new
-            {
-                Success = cities.Success,
-                Message = cities.Message,
-                Data = cities.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:cities.Data, success:cities.Success, msg:cities.Message));
         }
-        return BadRequest(new
-        {
-            Success = cities.Success,
-            Message = cities.Message,
-            Data = cities.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:cities.Data, success:cities.Success, msg:cities.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +48,9 @@ public class CitiesController : ControllerBase
         var cities = await _cityServices.GetAllCitiesPaginated(page, size);
         if(cities.Success)
         {
-            return Ok(new
-            {
-                Success = cities.Success,
-                Message = cities.Message,
-                Data = cities.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:cities.Data, success:cities.Success, msg:cities.Message));
         }
-        return BadRequest(new
-        {
-            Success = cities.Success,
-            Message = cities.Message,
-            Data = cities.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:cities.Data, success:cities.Success, msg:cities.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +59,9 @@ public class CitiesController : ControllerBase
         var data = await _cityServices.GetCityById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +71,9 @@ public class CitiesController : ControllerBase
         var result = await _cityServices.UpdateCity(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +83,8 @@ public class CitiesController : ControllerBase
         var result = await _cityServices.RemoveCity(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }

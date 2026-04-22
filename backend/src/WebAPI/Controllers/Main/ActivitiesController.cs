@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
-using src.Core.Utilities.Exceptions;
+using src.Core.Utilities.Constants;
+// using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.Activity;
 
 namespace src.WebAPI.Controllers.Main;
@@ -25,17 +26,9 @@ public class ActivitiesController : ControllerBase
         var result = await _activityServices.CreateNewActivity(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +37,9 @@ public class ActivitiesController : ControllerBase
         var activities = await _activityServices.GetAllActivities();
         if(activities.Success)
         {
-            return Ok(new
-            {
-                Success = activities.Success,
-                Message = activities.Message,
-                Data = activities.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:activities.Data, success:activities.Success, msg:activities.Message));
         }
-        return BadRequest(new
-        {
-            Success = activities.Success,
-            Message = activities.Message,
-            Data = activities.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:activities.Data, success:activities.Success, msg:activities.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +48,9 @@ public class ActivitiesController : ControllerBase
         var activities = await _activityServices.GetAllActivitiesPaginated(page, size);
         if(activities.Success)
         {
-            return Ok(new
-            {
-                Success = activities.Success,
-                Message = activities.Message,
-                Data = activities.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:activities.Data, success:activities.Success, msg:activities.Message));
         }
-        return BadRequest(new
-        {
-            Success = activities.Success,
-            Message = activities.Message,
-            Data = activities.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<object,string>(data:activities.Data, success:activities.Success, msg:activities.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +59,9 @@ public class ActivitiesController : ControllerBase
         var data = await _activityServices.GetActivityById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +71,9 @@ public class ActivitiesController : ControllerBase
         var result = await _activityServices.UpdateActivity(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +83,8 @@ public class ActivitiesController : ControllerBase
         var result = await _activityServices.RemoveActivity(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return(success:result.Success, msg:result.Message));
     }
 }

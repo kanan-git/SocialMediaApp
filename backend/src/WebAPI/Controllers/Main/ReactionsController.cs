@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Entities.DTOs.Reaction;
 
 namespace src.WebAPI.Controllers.Main;
@@ -22,19 +23,12 @@ public class ReactionsController : ControllerBase
     public async Task<IActionResult> CreateNewReaction(ReactionCreateDto create)
     {
         var result = await _reactionServices.CreateNewReaction(create);
+
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -43,19 +37,9 @@ public class ReactionsController : ControllerBase
         var reactions = await _reactionServices.GetAllReactions();
         if(reactions.Success)
         {
-            return Ok(new
-            {
-                Success = reactions.Success,
-                Message = reactions.Message,
-                Data = reactions.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:reactions.Data, success:reactions.Success, msg:reactions.Message));
         }
-        return BadRequest(new
-        {
-            Success = reactions.Success,
-            Message = reactions.Message,
-            Data = reactions.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:reactions.Data, success:reactions.Success, msg:reactions.Message));
     }
 
     [HttpGet("{page}")]
@@ -64,19 +48,9 @@ public class ReactionsController : ControllerBase
         var reactions = await _reactionServices.GetAllReactionsPaginated(page, size);
         if(reactions.Success)
         {
-            return Ok(new
-            {
-                Success = reactions.Success,
-                Message = reactions.Message,
-                Data = reactions.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:reactions.Data, success:reactions.Success, msg:reactions.Message));
         }
-        return BadRequest(new
-        {
-            Success = reactions.Success,
-            Message = reactions.Message,
-            Data = reactions.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:reactions.Data, success:reactions.Success, msg:reactions.Message));
     }
 
     [HttpGet("{id}")]
@@ -85,19 +59,9 @@ public class ReactionsController : ControllerBase
         var data = await _reactionServices.GetReactionById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic,string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -107,17 +71,9 @@ public class ReactionsController : ControllerBase
         var result = await _reactionServices.UpdateReaction(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -127,16 +83,8 @@ public class ReactionsController : ControllerBase
         var result = await _reactionServices.RemoveReaction(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return(success:result.Success, msg:result.Message));
     }
 }

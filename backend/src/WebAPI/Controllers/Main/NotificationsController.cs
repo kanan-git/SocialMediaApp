@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using src.Business.Services.Abstract;
+using src.Core.Utilities.Constants;
 using src.Core.Utilities.Exceptions;
 using src.Entities.DTOs.Notification;
 
@@ -25,17 +26,9 @@ public class NotificationsController : ControllerBase
         var result = await _notificationServices.CreateNewNotification(create);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpGet]
@@ -44,19 +37,9 @@ public class NotificationsController : ControllerBase
         var notifications = await _notificationServices.GetAllNotifications();
         if(notifications.Success)
         {
-            return Ok(new
-            {
-                Success = notifications.Success,
-                Message = notifications.Message,
-                Data = notifications.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:notifications.Data, success:notifications.Success, msg:notifications.Message));
         }
-        return BadRequest(new
-        {
-            Success = notifications.Success,
-            Message = notifications.Message,
-            Data = notifications.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:notifications.Data, success:notifications.Success, msg:notifications.Message));
     }
 
     [HttpGet("{page}")]
@@ -65,19 +48,9 @@ public class NotificationsController : ControllerBase
         var notifications = await _notificationServices.GetAllNotificationsPaginated(page, size);
         if(notifications.Success)
         {
-            return Ok(new
-            {
-                Success = notifications.Success,
-                Message = notifications.Message,
-                Data = notifications.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:notifications.Data, success:notifications.Success, msg:notifications.Message));
         }
-        return BadRequest(new
-        {
-            Success = notifications.Success,
-            Message = notifications.Message,
-            Data = notifications.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:notifications.Data, success:notifications.Success, msg:notifications.Message));
     }
 
     [HttpGet("{id}")]
@@ -86,19 +59,9 @@ public class NotificationsController : ControllerBase
         var data = await _notificationServices.GetNotificationById(id);
         if(data.Success)
         {
-            return Ok(new
-            {
-                Success = data.Success,
-                Message = data.Message,
-                Data = data.Data
-            });
+            return Ok(ControllerReturn.ReturnData<dynamic, string>(data:data.Data, success:data.Success, msg:data.Message));
         }
-        return BadRequest(new
-        {
-            Success = data.Success,
-            Message = data.Message,
-            Data = data.Data
-        });
+        return BadRequest(ControllerReturn.ReturnData<dynamic, string>(data:data.Data, success:data.Success, msg:data.Message));
     }
 
     [HttpPut("{id}")]
@@ -108,17 +71,9 @@ public class NotificationsController : ControllerBase
         var result = await _notificationServices.UpdateNotification(id, update);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 
     [HttpDelete("{id}")]
@@ -128,16 +83,8 @@ public class NotificationsController : ControllerBase
         var result = await _notificationServices.RemoveNotification(id);
         if(result.Success)
         {
-            return Ok(new
-            {
-                Success = result.Success,
-                Message = result.Message
-            });
+            return Ok(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
         }
-        return BadRequest(new
-        {
-            Success = result.Success,
-            Message = result.Message
-        });
+        return BadRequest(ControllerReturn.Return<string>(success:result.Success, msg:result.Message));
     }
 }
