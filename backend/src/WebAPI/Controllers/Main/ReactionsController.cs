@@ -13,15 +13,25 @@ namespace src.WebAPI.Controllers.Main;
 public class ReactionsController : ControllerBase
 {
     private readonly IReactionServices _reactionServices;
-    public ReactionsController(IReactionServices reactionServices)
+    private readonly INotificationServices _notificationServices;
+    public ReactionsController(IReactionServices reactionServices, INotificationServices notificationServices)
     {
         _reactionServices = reactionServices;
+        _notificationServices = notificationServices;
     }
 
     [HttpPost]
     [Authorize(Roles="Admin,User")]
     public async Task<IActionResult> CreateNewReaction(ReactionCreateDto create)
     {
+        // var notification = new NotificationCreateDto()
+        // {
+        //     // Type = NotificationType.post_got_like.ToString(),
+        //     // Description = $"",
+        //     // IsRead = false,
+        //     // ReceiverUserId = 
+        // };
+        // await _notificationServices.CreateNewNotification(notification);
         var result = await _reactionServices.CreateNewReaction(create);
 
         if(result.Success)

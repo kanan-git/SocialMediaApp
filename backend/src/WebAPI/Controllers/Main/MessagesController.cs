@@ -25,16 +25,9 @@ public class MessagesController : ControllerBase
     [Authorize(Roles="Admin,User")]
     public async Task<IActionResult> CreateNewMessage(MessageCreateDto create)
     {
-        // var activity = new ActivityCreateDto()
-        // {
-        //     // Category = ActivityCategories..ToString(),
-        //     // Description = $"",
-        //     // UserId = create.UserId
-        // };
-        // await _activityServices.CreateNewActivity(activity);
         // var notification = new NotificationCreateDto()
         // {
-        //     // Type = NotificationType..ToString(),
+        //     // Type = NotificationType.message_received.ToString(),
         //     // Description = $"",
         //     // IsRead = false,
         //     // ReceiverUserId = 

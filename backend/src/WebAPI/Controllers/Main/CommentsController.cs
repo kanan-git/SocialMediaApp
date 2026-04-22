@@ -29,14 +29,14 @@ public class CommentsController : ControllerBase
     {
         // var activity = new ActivityCreateDto()
         // {
-        //     // Category = ActivityCategories..ToString(),
+        //     // Category = ActivityCategories.content_create.ToString(),
         //     // Description = $"",
         //     // UserId = create.UserId
         // };
         // await _activityServices.CreateNewActivity(activity);
         // var notification = new NotificationCreateDto()
         // {
-        //     // Type = NotificationType..ToString(),
+        //     // Type = NotificationType.got_comment.ToString(),
         //     // Description = $"",
         //     // IsRead = false,
         //     // ReceiverUserId = 

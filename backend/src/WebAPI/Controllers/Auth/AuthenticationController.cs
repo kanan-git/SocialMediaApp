@@ -130,4 +130,12 @@ public class AuthenticationController : ControllerBase
 
         return Ok(ControllerReturn.Return<string>(success: true, msg: ResultMessages.Registered));
     }
+
+    // [HttpPost]
+    // public async Task<IActionResult> Logout()
+    // {}
+
+    // [HttpPost]
+    // public async Task<IActionResult> Recovery()
+    // {}
 }

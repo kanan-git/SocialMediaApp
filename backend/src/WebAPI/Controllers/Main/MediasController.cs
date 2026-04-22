@@ -38,19 +38,11 @@ public class MediasController : ControllerBase
     {
         // var activity = new ActivityCreateDto()
         // {
-        //     // Category = ActivityCategories..ToString(),
+        //     // Category = ActivityCategories.file_upload.ToString(),
         //     // Description = $"",
         //     // UserId = create.UserId
         // };
         // await _activityServices.CreateNewActivity(activity);
-        // var notification = new NotificationCreateDto()
-        // {
-        //     // Type = NotificationType..ToString(),
-        //     // Description = $"",
-        //     // IsRead = false,
-        //     // ReceiverUserId = 
-        // };
-        // await _notificationServices.CreateNewNotification(notification);
         if (file == null || file.Length == 0)
             return BadRequest(ControllerReturn.Return<string>(success:false, msg:"No file uploaded."));
 
