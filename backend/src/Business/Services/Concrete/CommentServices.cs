@@ -90,22 +90,22 @@ public class CommentServices : ICommentServices
         {
             return new ErrorResult(ResultMessages.NoMatchFound);
         }
-        var deleteReplies = await _unitOfWork.CommentRepository.GetAllAsync(c => c.TargetCommentId == id);
-        if(deleteReplies.Count > 0)
-        {
-            foreach(var replyComment in deleteReplies)
-            {
-                _unitOfWork.CommentRepository.Remove(replyComment);
-            }
-        }
-        var deleteReactions = await _unitOfWork.ReactionRepository.GetAllAsync(r => r.CommentId == id);
-        if(deleteReactions.Count > 0)
-        {
-            foreach(var commentReaction in deleteReactions)
-            {
-                _unitOfWork.ReactionRepository.Remove(commentReaction);
-            }
-        }
+        // var deleteReplies = await _unitOfWork.CommentRepository.GetAllAsync(c => c.TargetCommentId == id);
+        // if(deleteReplies.Count > 0)
+        // {
+        //     foreach(var replyComment in deleteReplies)
+        //     {
+        //         _unitOfWork.CommentRepository.Remove(replyComment);
+        //     }
+        // }
+        // var deleteReactions = await _unitOfWork.ReactionRepository.GetAllAsync(r => r.CommentId == id);
+        // if(deleteReactions.Count > 0)
+        // {
+        //     foreach(var commentReaction in deleteReactions)
+        //     {
+        //         _unitOfWork.ReactionRepository.Remove(commentReaction);
+        //     }
+        // }
         _unitOfWork.CommentRepository.Remove(delete);
         var result = await _unitOfWork.SaveAsync();
         if(result > 0)

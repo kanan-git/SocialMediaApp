@@ -9,27 +9,6 @@ import "./assets/styles/global.css";
 
 
 function App() {
-	const [result, setResult] = useState(null);
-
-	async function testAll_GetAll() {
-		for(let i=0; i<Object.keys(endpoints.crud).length; i++) {
-			if(Object.keys(endpoints.crud)[i] == "medias") {
-				continue;
-			};
-			
-			const url = endpoints.crud[Object.keys(endpoints.crud)[i]]["findAll"];
-			const result = await customFetchJson(url, null, httpMethods.read, null);
-
-			console.log(`▼————————————————————————————————————————▼\n■■■►${Object.keys(endpoints.crud)[i].toUpperCase()}◄■■■`);
-			console.log(result);
-			console.log("▲————————————————————————————————————————▲");
-		};
-	};
-
-	useEffect(() => {
-		// testAll_GetAll();
-	}, []);
-
 	return (
 		<div>
 			—aaaaaaaaaaaaaaaaa—

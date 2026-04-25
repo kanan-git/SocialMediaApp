@@ -61,6 +61,7 @@ public class MediaServices : IMediaServices
     public async Task<IDataResult<MediaResponseDto>> GetMediaById(int id)
     {
         var file = await _unitOfWork.MediaRepository.GetAsync(m => m.Id == id);
+        // no match found error if doesnt match any
         var result = _mapper.Map<MediaResponseDto>(file);
         if(result == null)
         {

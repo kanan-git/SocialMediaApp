@@ -115,15 +115,17 @@ public class MediasController : ControllerBase
             return NotFound(ControllerReturn.Return<string>(success:false, msg:"File not found."));
 
         // 🔒 Enforce ownership (Admin can access all)
-        var currentUserIdClaim = User.FindFirst("sub")?.Value;
+        // var currentUserIdClaim = User.FindFirst("sub")?.Value;
+        var currentUserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         if (currentUserIdClaim == null)
             return Unauthorized(ControllerReturn.Return<string>(success:false, msg:ResultMessages.Unauthorized));
-
+        
         var currentUserId = int.Parse(currentUserIdClaim);
-        var isAdmin = User.IsInRole("Admin");
+        // var isAdmin = User.IsInRole("Admin");
 
-        if (!isAdmin && fileRecord.Data.UserId != currentUserId)
+        // if (!isAdmin && fileRecord.Data.UserId != currentUserId)
+        if (fileRecord.Data.UserId != currentUserId)
             return Forbid(ControllerReturn.Return(success:false, msg:"Forbidden!"));
 
         var fullPath = Path.Combine(_env.WebRootPath, fileRecord.Data.FilePath);
@@ -155,7 +157,8 @@ public class MediasController : ControllerBase
             return NotFound(ControllerReturn.Return(success:false, msg:"File not found."));
 
         // 🔒 Enforce ownership (Admin can delete any file)
-        var currentUserIdClaim = User.FindFirst("sub")?.Value;
+        // var currentUserIdClaim = User.FindFirst("sub")?.Value;
+        var currentUserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         if (currentUserIdClaim == null)
             return Unauthorized(ControllerReturn.Return(success:false, msg:ResultMessages.Unauthorized));

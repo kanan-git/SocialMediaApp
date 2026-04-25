@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SB5JKqp4Leg=",
+  "dgSpecHash": "qLiKd5r6T4g=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kanan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\kanan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -75,9 +75,9 @@
       "code": "NU1510",
       "level": "Warning",
       "message": "PackageReference Microsoft.AspNetCore.Identity will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
-      "projectPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
+      "filePath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
       "libraryId": "Microsoft.AspNetCore.Identity",
       "targetGraphs": [
         "net10.0"
@@ -87,9 +87,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'AutoMapper' 12.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
-      "projectPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Documentation\\DESKTOP\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
+      "filePath": "C:\\Users\\kanan\\OneDrive\\Desktop\\Shared Public Git Projects\\(1) Social Media App\\backend\\backend.csproj",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net10.0"

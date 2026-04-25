@@ -29,9 +29,13 @@ public class PostConfigurations : IEntityTypeConfiguration<Post>
             .WithMany(u => u.Posts)
             .HasForeignKey(p => p.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+        // builder.HasMany(p => p.Reactions)
+        //     .WithOne(r => r.Post)
+        //     .HasForeignKey(r => r.PostId)
+        //     .OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(p => p.Reactions)
             .WithOne(r => r.Post)
             .HasForeignKey(r => r.PostId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
