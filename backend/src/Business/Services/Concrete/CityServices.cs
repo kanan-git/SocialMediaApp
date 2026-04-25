@@ -35,7 +35,8 @@ public class CityServices : ICityServices
     public async Task<IDataResult<List<CityResponseDto>>> GetAllCities()
     {
         // select, include, where
-        var cities = await _unitOfWork.CityRepository.GetAllAsync();
+        // var cities = await _unitOfWork.CityRepository.GetAllAsync();
+        var cities = await _unitOfWork.CityRepository.GetAllAsync(null, "Country");
         var result = _mapper.Map<List<CityResponseDto>>(cities);
         if(result.Count == 0)
         {
