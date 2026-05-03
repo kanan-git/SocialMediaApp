@@ -220,17 +220,176 @@ function Home() {
                     </div>
                 </aside>
 
-                {/* center section */}
-                <section className={styles.feed}>
-                    <div>
-                        share post
+                {/* center section homepage */}
+                <section className={styles.homefeed}>
+                    <form className={styles.homefeed_sharepost}>
+                        <div className={styles.homefeed_sharepost_top}>
+                            <div>
+                                <img src="" alt="" />
+                            </div>
+                            <div action="">
+                                <textarea name="" id=""></textarea>
+                            </div>
+                        </div>
+                        <div className={styles.homefeed_sharepost_tagbreadcrumb}>
+                            <div>
+                                <span>
+                                    #category1
+                                </span>
+                                <button>
+                                    <i className={icons.xMark}></i>
+                                </button>
+                            </div>
+                            <div>
+                                <span>
+                                    #category2
+                                </span>
+                                <button>
+                                    <i className={icons.xMark}></i>
+                                </button>
+                            </div>
+                            <div>
+                                <span>
+                                    #category3
+                                </span>
+                                <button>
+                                    <i className={icons.xMark}></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className={styles.homefeed_sharepost_preferences}>
+                            <span>
+                                <i className={icons.media}></i>
+                                <input type="file" name="" id="" />
+                            </span>
+                            <span>
+                                <i className={icons.hashtag}></i>
+                                <input type="text" />
+                            </span>
+                            <span>
+                                <div>
+                                    <div>
+                                        <i className={icons.public}></i>
+                                        <span>public</span>
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <i className={icons.public}></i>
+                                            <span>public</span>
+                                        </div>
+                                        <div>
+                                            <i className={icons.private}></i>
+                                            <span>private</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </form>
+                    <div className={styles.homefeed_container}>
+                        <div className={styles.postcard}>
+                            <div className={styles.postcard_top}>
+                                </div>
+                                    <div>
+                                        <img src="" alt="photo" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span>John</span>
+                                            <span>Doe</span>
+                                        </div>
+                                        <div>
+                                            <span>
+                                                2h ago
+                                            </span>
+                                            <span>
+                                                •
+                                            </span>
+                                            <span>
+                                                <i className={icons.globe}></i>
+                                                <span>Baku, Azerbaijan</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <div>
+                                <div>
+                                    <button>
+                                        <i className={icons.threeDots}></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <article className={styles.postcard_content}>
+                                <p>Lorem ipsum dolor sit amet.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt.</p>
+                                <p>Lorem, ipsum.</p>
+                            </article>
+                            <div className={styles.postcard_tags}>
+                                <span>#nature</span>
+                                <span>#travel</span>
+                                <span>#adventure</span>
+                            </div>
+                            <div className={styles.postcard_medias}>
+                                <span>1/3</span>
+
+                                <div>
+                                    <img src="" alt="image" />
+                                </div>
+                                <div>
+                                    <img src="" alt="image" />
+                                </div>
+                                <div>
+                                    <img src="" alt="image" />
+                                </div>
+
+                                <button>
+                                    ◄
+                                </button>
+                                <button>
+                                    ►
+                                </button>
+                            </div>
+                            <div className={styles.postcard_features}>
+                                <div>
+                                    <button>
+                                        <span>123k</span>
+                                        <i className={icons.like}></i>
+                                        <span>like</span>
+                                    </button>
+                                    <button>
+                                        <span>999</span>
+                                        <i className={icons.dislike}></i>
+                                        <span>dislike</span>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button>
+                                        <span>0</span>
+                                        <i className={icons.comments}></i>
+                                        <span>comments</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        posts container
+                    <div className={styles.homefeed_loading}>
+                        <span>loading more posts...</span>
                     </div>
-                    <div>
-                        loading with conditional | loading more posts...
-                    </div>
+                </section>
+
+                {/* center section explore */}
+                <section className={styles.explore}>
+                    {/*  */}
+                </section>
+
+                {/* center section messages */}
+                <section className={styles.messages}>
+                    {/*  */}
+                </section>
+
+                {/* center section profile */}
+                <section className={styles.profile}>
+                    {/*  */}
                 </section>
 
                 {/* sidebar right */}
