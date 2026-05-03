@@ -379,7 +379,24 @@ function Home() {
 
                 {/* center section explore */}
                 <section className={styles.explore}>
-                    {/*  */}
+                    <div className={styles.explore_top}>
+                        <h1>
+                            explore
+                        </h1>
+                        <div>
+                            <span>"John Doe" search results (99):</span>
+                        </div>
+                    </div>
+                    <div className={styles.explore_preferences}>
+                        <button>all</button>
+                        <button>people</button>
+                        <button>posts</button>
+                        <button>hashtags</button>
+                        <button>trending</button>
+                    </div>
+                    <div className={styles.explore_container}>
+                        {/* postcards here */}
+                    </div>
                 </section>
 
                 {/* center section messages */}

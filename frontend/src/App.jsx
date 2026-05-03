@@ -18,7 +18,6 @@ import E404 from "./pages/error/E404/E404.jsx";
 import Messages from "./pages/user/Messages/Messages.jsx";
 import Notifications from "./pages/user/Notifications/Notifications.jsx";
 import Settings from "./pages/user/Settings/Settings.jsx";
-// import UserDashboard from "./pages/user/UserDashboard/UserDashboard.jsx";
 import "./assets/styles/animations.css";
 import "./assets/styles/global.css";
 import "./assets/styles/presets.css";
@@ -48,7 +47,6 @@ function App() {
 				<Route path="/user/messages" element={<Messages />} />
 				<Route path="/user/notifications" element={<Notifications />} />
 				<Route path="/user/settings" element={<Settings />} />
-				{/* <Route path="/user/dashboard" element={<UserDashboard />} /> */}
 
 				{/* CORE ROUTES */}
 				<Route path="/about" element={<About />} />
