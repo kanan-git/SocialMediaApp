@@ -6,6 +6,20 @@ const bootstrapIcons = {
     xMark: "bi bi-x",
     reload: "bi bi-counterclockwise",
     threeDots: "bi bi-three-dots",
+    activity: "bi bi-activity",
+    clock: "bi bi-clock-history",
+    markAllRead: "bi bi-check2-circle",
+
+    sentMessage: "bi bi-check2",
+    receivedMessage: "bi bi-check2-all",
+
+    aboutUsers: "bi bi-person-circle",
+    aboutPosts: "bi bi-file-emark-image",
+    aboutChats: "bi bi-chat-square-dots",
+
+    statistic: "bi bi-graph-up-arrow",
+    sendMessageTo: "bi bi-box-arrow-up-right",
+    editProfile: "bi bi-pencil-square",
 
     chat: "bi bi-chat",
     chatTyping: "bi bi-chat-dots",
