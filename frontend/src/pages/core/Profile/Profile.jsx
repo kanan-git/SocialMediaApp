@@ -1,10 +1,94 @@
 import React, { useState, useEffect } from "react";
+import Header from "../../../components/layout/Header/Header.jsx";
+import CoreSideNavbar from "../../../components/layout/CoreSideNavbar/CoreSideNavbar.jsx";
+import CoreSideDiscover from "../../../components/layout/CoreSideDiscover/CoreSideDiscover.jsx";
+import Footer from "../../../components/layout/Footer/Footer.jsx";
+import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Profile.module.css";
 
 function Profile() {
     return (
         <>
-            Profile page
+            <Header />
+            
+            <main className={styles.main}>
+                <CoreSideNavbar />
+
+                <section className={styles.profile}>
+                    {/* center section profile */}
+                    <div className={styles.profile_main}>
+                        <div>
+                            <img src="" alt="cover" />
+                        </div>
+                        <div>
+                            <div>
+                                <img src="" alt="profile" />
+                            </div>
+                            <div>
+                                <h2>firstname lastname</h2>
+                                <p>@username</p>
+                                <div>
+                                    <i className={icons.map}></i>
+                                    <span>Baku, Azerbaijan</span>
+                                </div>
+                            </div>
+                        </div>
+                        <article>
+                            <span>
+                                Bio. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi beatae eos facere ab, tempore quis.
+                            </span>
+                            <span>#hashtag1</span>
+                            <span>#hashtag2</span>
+                            <span>#hashtag3</span>
+                        </article>
+                        <div>
+                            <div>
+                                <i className={icons.statistic}></i>
+                            </div>
+                            <div>
+                                <div>
+                                    <b>5.4k</b>
+                                    <p>followers</p>
+                                </div>
+                                <div>
+                                    <b>1.8k</b>
+                                    <p>following</p>
+                                </div>
+                                <div>
+                                    <b>50</b>
+                                    <p>posts</p>
+                                </div>
+                                <div>
+                                    <b>12</b>
+                                    <p>comments</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button>
+                                <i className={icons.editProfile}></i>
+                                <span>edit profile</span>
+                            </button>
+                            <button>
+                                <i className={icons.sendMessageTo}></i>
+                                <span>message</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div className={styles.profile_navbar}>
+                        <button>all</button>
+                        <button>posts</button>
+                        <button>comments</button>
+                    </div>
+                    <div className={styles.profile_container}>
+                        {/* cards, own posts, own comments */}
+                    </div>
+                </section>
+
+                <CoreSideDiscover />
+            </main>
+
+            <Footer />
         </>
     );
 };
