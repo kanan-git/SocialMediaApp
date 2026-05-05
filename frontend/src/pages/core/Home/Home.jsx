@@ -127,6 +127,12 @@ function Home() {
                 <aside className={styles.adminnav}>
                     <ul>
                         <li>
+                            <Link to="/">
+                                <i className={icons.home}></i>
+                                <span>homepage</span>
+                            </Link>
+                        </li>
+                        <li>
                             <Link to="/admin/#">
                                 <i className={icons.dashboard}></i>
                                 <span>dashboard</span>
@@ -161,6 +167,14 @@ function Home() {
 
                 {/* sidebar left */}
                 <aside className={styles.nav}>
+                    <ul>
+                        <li>
+                            <Link to="/admin/dashboard">
+                                <i className={icons.home}></i>
+                                <span>admin panel</span>
+                            </Link>
+                        </li>
+                    </ul>
                     <ul>
                         <li>
                             <Link to="/">
@@ -757,6 +771,20 @@ function Home() {
                         </div>
                         <div>
                             <span>
+                                <label htmlFor="">confirm old password:</label>
+                                <input type="password" />
+                            </span>
+                            <span>
+                                <label htmlFor="">set new password:</label>
+                                <input type="password" />
+                            </span>
+                            <span>
+                                <label htmlFor="">repeat new password:</label>
+                                <input type="password" />
+                            </span>
+                        </div>
+                        <div>
+                            <span>
                                 <button>cancel</button>
                                 <button>save</button>
                             </span>
@@ -792,29 +820,176 @@ function Home() {
                     {/*  */}
                 </section>
 
+                {/* modal */}
+                <div>
+                    <div>
+                        {/* overlay with category transparent color */}
+                    </div>
+                    <div>
+                        <div>
+                            <h3>title</h3>
+                            <button>
+                                <i className={icons.xMark}></i>
+                            </button>
+                        </div>
+                        <div>
+                            {/* content */}
+                        </div>
+                        <div>
+                            {/* buttons [cancel, save, apply, reset, ok, yes, no, ...] */}
+                        </div>
+                    </div>
+                </div>
+
+                {/* center top announcement notification slide in bar like toastify */}
+                <div>
+                    {/* ... */}
+                </div>
+
                 {/* center section error401 */}
                 <section className={styles.error401}>
-                    {/*  */}
+                    <div>{/* animated background */}</div>
+                    <div>
+                        <div>
+                            <h1>401</h1>
+                            <p>unauthorized</p>
+                        </div>
+                        <Link to="/">go back to the homepage</Link>
+                    </div>
                 </section>
 
                 {/* center section error404 */}
                 <section className={styles.error404}>
-                    {/*  */}
+                    <div>{/* animated background */}</div>
+                    <div>
+                        <div>
+                            <h1>404</h1>
+                            <p>page not found</p>
+                        </div>
+                        <Link to="/">go back to the homepage</Link>
+                    </div>
                 </section>
 
                 {/* center section login */}
                 <section className={styles.login}>
-                    {/*  */}
+                    <div>{/* animated background */}</div>
+                    <div>
+                        {/* window center form */}
+                        <div>
+                            <div>
+                                <img src="" alt="logo" />
+                            </div>
+                            <h2>welcome to the socialmediaapp</h2>
+                            <Link to="/">continue as a guest</Link>
+                            <form action="">
+                                <input type="text" placeholder="email" />
+                                <input type="password" />
+                                <div>
+                                    <span>
+                                        <input type="checkbox" />
+                                        <label htmlFor="">remember me</label>
+                                    </span>
+                                    <Link to="/auth/recovery">forgot password?</Link>
+                                </div>
+                                <button>login</button>
+                                <button>
+                                    <i className={icons.google}></i>
+                                    <span>Continue with Google</span>
+                                </button>
+                                <div>
+                                    <span>dont have an account?</span>
+                                    <Link to="/auth/register">sign up</Link>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            {/* company or community names, brand logos, something like that */}
+                        </div>
+                    </div>
                 </section>
 
                 {/* center section register */}
                 <section className={styles.register}>
-                    {/*  */}
+                        {/* window center form */}
+                        <div>
+                            <div>
+                                <img src="" alt="logo" />
+                            </div>
+                            <h2>create an account</h2>
+                            <form action="">
+                                <div>
+                                    <input type="text" placeholder="firstname" />
+                                    <input type="text" placeholder="lastname" />
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="set username" />
+                                    <input type="email" placeholder="email address" />
+                                </div>
+                                <div>
+                                    <select name="country" id="">
+                                        <option value=""></option>
+                                    </select>
+                                    <select name="city" id="">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="date" name="" id="" />
+                                    <input type="tel" />
+                                </div>
+                                <div>
+                                    <input type="password" placeholder="create password" />
+                                    <input type="password" placeholder="repeat password" />
+                                </div>
+                                <div>
+                                    <input type="checkbox" />
+                                    <label htmlFor="">agree</label>
+                                </div>
+                                <button>register</button>
+                                <button>
+                                    <i className={icons.google}></i>
+                                    <span>Continue with Google</span>
+                                </button>
+                                <div>
+                                    <span>already have an account?</span>
+                                    <Link to="/auth/login">sign in</Link>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            {/* company or community names, brand logos, something like that */}
+                        </div>
                 </section>
 
                 {/* center section forgotpassword */}
                 <section className={styles.forgotpassword}>
-                    {/*  */}
+                    <div>
+                        {/* window center form */}
+
+                        {/* phase 1 */}
+                        <form action="">
+                            <div>
+                                <input type="text" placeholder="enter your username" />
+                                <input type="tel" placeholder="your phone number" />
+                                <button>send me verification code</button>
+                                <Link to="/auth/login">back to the login page</Link>
+                            </div>
+
+                            {/* after click */}
+                            <div>
+                                <input type="text" placeholder="enter 6 digit code" />
+                                <span>1:59</span>
+                                <button>verify</button>
+                            </div>
+                        </form>
+
+                        {/* phase 2 */}
+                        <form action="">
+                            <input type="password" placeholder="set new password" />
+                            <input type="password" placeholder="confirm password" />
+                            <button>change password</button>
+                        </form>
+                    </div>
                 </section>
 
                 {/* sidebar right */}

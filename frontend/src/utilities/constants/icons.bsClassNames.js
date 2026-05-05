@@ -31,6 +31,7 @@ const bootstrapIcons = {
 
     youtube: "bi bi-youtube",
     linkedin: "bi bi-linkedin",
+    google: "bi bi-google",
 
     envelopeAt: "bi bi-envelope-at",
     telephone: "bi bi-telephone",
