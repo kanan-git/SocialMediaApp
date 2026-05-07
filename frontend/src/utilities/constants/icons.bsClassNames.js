@@ -9,6 +9,7 @@ const bootstrapIcons = {
     activity: "bi bi-activity",
     clock: "bi bi-clock-history",
     markAllRead: "bi bi-check2-circle",
+    search: "bi bi-search",
 
     sentMessage: "bi bi-check2",
     receivedMessage: "bi bi-check2-all",

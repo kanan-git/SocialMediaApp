@@ -1,0 +1,27 @@
+.footer {}
+.top {
+    display: flex;
+}
+.info {}
+.nav {}
+.group {
+    display: flex;
+}
+.column {}
+.column {}
+.group {}
+.column {}
+.column {}
+.bottom {}
+
+@media only screen and (max-width: var(--laptop-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--tablet-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--mobile-width)) {
+    /*  */
+}

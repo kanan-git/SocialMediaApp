@@ -10,12 +10,6 @@ import languages from "../../../utilities/constants/languages.js";
 
 function Home() {
     const navigate = useNavigate();
-    const [query, setQuery] = useState("");
-
-    function handleSearch(e) {
-        e.preventDefault();
-        navigate("/explore?search=" + encodeURIComponent(query));
-    };
 
     useEffect(() => {
         // 
