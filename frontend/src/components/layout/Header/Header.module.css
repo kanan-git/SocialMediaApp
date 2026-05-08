@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
     width: 100%;
     height: 3rem;
     border-bottom: 1px solid black;
@@ -11,13 +10,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: yellow;
+    background-color: white;
     width: min(1920px, 100%);
     height: 100%;
 }
 .logo {
     width: auto;
+    width: 25%;
     height: 100%;
+    cursor: pointer;
 }
 .logo > img {
     width: auto;
@@ -30,8 +31,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: blue;
     width: min(960px, 50%);
+    width: 50%;
     height: 100%;
     padding: 0 0.5rem;
 }
@@ -50,7 +51,8 @@
 .auth {
     display: none;
     gap: 1rem;
-    padding-right: 1rem;
+    justify-content: center;
+    width: 25%;
 }
 .auth_button {
     width: fit-content;
@@ -65,32 +67,87 @@
     color: black;
 }
 .auth_button:last-of-type {
-    background-color: mediumslateblue;
     color: white;
 }
 .cta {
     display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
 }
 .cta_lightmode {
-    width: 5rem;
-    background-color: red;
+    width: fit-content;
 }
-.cta_lightmode_button {}
-.cta_lightmode_button > i {}
-.cta_lightmode_button_switch {}
-.cta_lightmode_button_switch > i {}
-.cta_language {}
-.cta_language_output {}
+.cta_lightmode_button {
+    border-radius: 1.5rem;
+    position: relative;
+    width: 3rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    overflow: hidden;
+    outline: none;
+    border: 1px solid black;
+    /* background-color: green; */
+    background-color: red;
+    cursor: pointer;
+}
+.cta_lightmode_button > i {
+    opacity: 75%;
+    font-size: 0.5rem;
+}
+.cta_lightmode_button_switch {
+    border-radius: 1.5rem;
+    position: absolute;
+    /* right: -1px; */
+    left: -1px;
+    top: -1px;
+    background-color: white;
+    width: 1.5rem;
+    height: 1.5rem;
+    box-sizing: content-box;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cta_lightmode_button_switch > i {
+    color: black;
+}
+.cta_language {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.cta_language_output {
+    font-size: 1rem;
+}
+.cta_language > i {
+    scale: 0.7;
+}
 .cta_language_dropdown {
     display: none;
 }
-.cta_profile {}
-.cta_profile_image {}
+.cta_profile {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.cta_profile_image {
+    width: auto;
+}
 .dropdown {
     display: none;
 }
-.dropdown_button {}
-.indicator {}
+.dropdown_button {
+    width: auto;
+}
+.indicator {
+    width: fit-content;
+}
 
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */

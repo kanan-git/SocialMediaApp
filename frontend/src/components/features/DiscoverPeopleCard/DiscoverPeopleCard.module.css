@@ -1,0 +1,73 @@
+.peoplecard {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.peoplecard > div:nth-of-type(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 3rem;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.peoplecard > div:nth-of-type(1) > img {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+
+.peoplecard > div:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.peoplecard > div:nth-of-type(2) > h5 {
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.peoplecard > div:nth-of-type(2) > span {
+    color: #00000090;
+    font-style: italic;
+}
+
+.peoplecard > div:nth-of-type(3) {
+    display: flex;
+    gap: 1rem;
+}
+
+.peoplecard > div:nth-of-type(3) > button {
+    cursor: pointer;
+}
+
+.peoplecard > div:nth-of-type(3) > button:first-of-type {
+    border: none;
+    outline: none;
+    background: transparent;
+    text-transform: capitalize;
+}
+
+.peoplecard > div:nth-of-type(3) > button:last-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+}
+
+.peoplecard > div:nth-of-type(3) > button:last-of-type > i {
+    color: black;
+}

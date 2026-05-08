@@ -4,6 +4,9 @@
     padding: 0;
     list-style: none;
     text-decoration: none;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: #6607ff #ffffff;
 }
 
 a {

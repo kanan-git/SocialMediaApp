@@ -8,14 +8,14 @@ function CoreSideNavbar() {
     return (
         <aside className={styles.nav}>
             {/* sidebar left */}
-            <ul>
+            {/* <ul>
                 <li>
                     <Link to="/admin/dashboard">
                         <i className={icons.home}></i>
                         <span>admin panel</span>
                     </Link>
                 </li>
-            </ul>
+            </ul> */}
             <ul>
                 <li>
                     <Link to="/">
@@ -24,7 +24,7 @@ function CoreSideNavbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="/explore">
                         <i className={icons.explore}></i>
                         <span>explore</span>
                     </Link>
@@ -32,25 +32,25 @@ function CoreSideNavbar() {
             </ul>
             <ul>
                 <li>
-                    <Link to="/">
+                    <Link to="/profile">
                         <i className={icons.profile}></i>
                         <span>profile</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="/user/messages">
                         <i className={icons.messages}></i>
                         <span>messages</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="/user/notifications">
                         <i className={icons.notifications}></i>
                         <span>notifications</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="/user/settings">
                         <i className={icons.settings}></i>
                         <span>settings</span>
                     </Link>
@@ -58,21 +58,18 @@ function CoreSideNavbar() {
             </ul>
             <ul>
                 <li>
-                    <Link to="/">
+                    <Link to="/about">
                         <i className={icons.about}></i>
                         <span>about</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="/contact">
                         <i className={icons.contact}></i>
                         <span>contact</span>
                     </Link>
                 </li>
             </ul>
-            <div>
-                <button>+ create post</button>
-            </div>
         </aside>
     );
 };

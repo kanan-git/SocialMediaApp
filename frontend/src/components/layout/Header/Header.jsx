@@ -21,9 +21,9 @@ function Header() {
                 {/* <button></button> */}
 
                 {/* leftside logo */}
-                <div className={styles.logo}>
+                <Link className={styles.logo} to="/">
                     <img src={Logo} alt="logo" />
-                </div>
+                </Link>
 
                 {/* center searchbar */}
                 <form 

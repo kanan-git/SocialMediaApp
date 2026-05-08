@@ -4,12 +4,15 @@ const bootstrapIcons = {
     chevronDown: "bi bi-chevron-down",
     globe: "bi bi-center-south-asia",
     xMark: "bi bi-x",
-    reload: "bi bi-counterclockwise",
+    reload: "bi bi-arrow-counterclockwise",
     threeDots: "bi bi-three-dots",
     activity: "bi bi-activity",
     clock: "bi bi-clock-history",
     markAllRead: "bi bi-check2-circle",
     search: "bi bi-search",
+
+    slidePrev: "bi bi-chevron-compact-left",
+    slideNext: "bi bi-chevron-compact-right",
 
     sentMessage: "bi bi-check2",
     receivedMessage: "bi bi-check2-all",
@@ -52,10 +55,10 @@ const bootstrapIcons = {
     notifications: "bi bi-app-indicator",
     users: "bi bi-people",
     posts: "bi bi-broadcast",
-    comments: "bi bi-signal",
+    comments: "bi bi-chat-left-text",
 
-    like: "bi bi-hand-thumb-up",
-    dislike: "bi bi-hand-thumb-down",
+    like: "bi bi-hand-thumbs-up",
+    dislike: "bi bi-hand-thumbs-down",
 
     genderM: "bi bi-gender-male",
     genderFM: "bi bi-gender-female",

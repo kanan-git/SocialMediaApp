@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import TrendHashtagCard from "../../features/TrendHashtagCard/TrendHashtagCard.jsx";
+import DiscoverPeopleCard from "../../features/DiscoverPeopleCard/DiscoverPeopleCard.jsx";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./CoreSideDiscover.module.css";
 import languages from "../../../utilities/constants/languages.js";
@@ -14,144 +16,24 @@ function CoreSideDiscover() {
                     <Link to="/explore">see all</Link>
                 </div>
                 <div className={styles.trendtags_container}>
-                    <div className={styles.hashtagcard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <strong>#category</strong>
-                            <span>1.2M posts</span>
-                        </div>
-                    </div>
-                    <div className={styles.hashtagcard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <strong>#category</strong>
-                            <span>1.2M posts</span>
-                        </div>
-                    </div>
-                    <div className={styles.hashtagcard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <strong>#category</strong>
-                            <span>1.2M posts</span>
-                        </div>
-                    </div>
-                    <div className={styles.hashtagcard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <strong>#category</strong>
-                            <span>1.2M posts</span>
-                        </div>
-                    </div>
-                    <div className={styles.hashtagcard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <strong>#category</strong>
-                            <span>1.2M posts</span>
-                        </div>
-                    </div>
+                    <TrendHashtagCard imgPath="" category="travel" postCount={1000} />
+                    <TrendHashtagCard imgPath="" category="art" postCount={0} />
+                    <TrendHashtagCard imgPath="" category="tech" postCount={99999} />
+                    <TrendHashtagCard imgPath="" category="food" postCount={1} />
+                    <TrendHashtagCard imgPath="" category="politics" postCount={5} />
                 </div>
             </div>
             <div className={styles.people}>
-                <div className={styles.trendtags_top}>
+                <div className={styles.people_top}>
                     <h3>people you may know hashtags</h3>
                     <Link to="/explore">see all</Link>
                 </div>
                 <div className={styles.people_container}>
-                    <div className={styles.peoplecard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <h5>firstname lastname</h5>
-                            <span>Baku, Azerbaijan</span>
-                        </div>
-                        <div>
-                            <button>
-                                follow
-                            </button>
-                            <button>
-                                <i className={icons.xMark}></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div className={styles.peoplecard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <h5>firstname lastname</h5>
-                            <span>Baku, Azerbaijan</span>
-                        </div>
-                        <div>
-                            <button>
-                                follow
-                            </button>
-                            <button>
-                                <i className={icons.xMark}></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div className={styles.peoplecard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <h5>firstname lastname</h5>
-                            <span>Baku, Azerbaijan</span>
-                        </div>
-                        <div>
-                            <button>
-                                follow
-                            </button>
-                            <button>
-                                <i className={icons.xMark}></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div className={styles.peoplecard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <h5>firstname lastname</h5>
-                            <span>Baku, Azerbaijan</span>
-                        </div>
-                        <div>
-                            <button>
-                                follow
-                            </button>
-                            <button>
-                                <i className={icons.xMark}></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div className={styles.peoplecard}>
-                        <div>
-                            <img src="" alt="photo" />
-                        </div>
-                        <div>
-                            <h5>firstname lastname</h5>
-                            <span>Baku, Azerbaijan</span>
-                        </div>
-                        <div>
-                            <button>
-                                follow
-                            </button>
-                            <button>
-                                <i className={icons.xMark}></i>
-                            </button>
-                        </div>
-                    </div>
+                    <DiscoverPeopleCard imgPath="" firstname="Lorem" lastname="Ipsum" city="Baku" country="Azerbaijan" isFollowing={false} />
+                    <DiscoverPeopleCard imgPath="" firstname="Firstname" lastname="Lastname" city="Ganja" country="Azerbaijan" isFollowing={false} />
+                    <DiscoverPeopleCard imgPath="" firstname="John" lastname="Doe" city="Istanbul" country="Turkey" isFollowing={false} />
+                    <DiscoverPeopleCard imgPath="" firstname="Unnamed" lastname="User" city="Ankara" country="Turkey" isFollowing={false} />
+                    <DiscoverPeopleCard imgPath="" firstname="Abc" lastname="Def" city="New York" country="USA" isFollowing={false} />
                 </div>
             </div>
         </aside>

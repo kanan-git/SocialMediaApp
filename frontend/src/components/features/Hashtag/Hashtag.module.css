@@ -1,0 +1,28 @@
+.hashtag {
+    background-color: #dbdbdb;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.hashtag > span {
+    text-transform: lowercase;
+}
+
+.hashtag > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.hashtag > button > i {
+    color: black;
+}

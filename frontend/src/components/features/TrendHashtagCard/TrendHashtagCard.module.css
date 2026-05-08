@@ -1,0 +1,41 @@
+.hashtagcard {
+    border: 1px solid black;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.hashtagcard > div:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 3rem;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.hashtagcard > div:first-of-type > img {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+.hashtagcard > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hashtagcard > div:last-of-type > strong {
+    font-size: 1rem;
+}
+
+.hashtagcard > div:last-of-type > span {
+    font-size: 1rem;
+}

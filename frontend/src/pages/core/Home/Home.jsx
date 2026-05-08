@@ -4,6 +4,8 @@ import Header from "../../../components/layout/Header/Header.jsx";
 import CoreSideNavbar from "../../../components/layout/CoreSideNavbar/CoreSideNavbar.jsx";
 import CoreSideDiscover from "../../../components/layout/CoreSideDiscover/CoreSideDiscover.jsx";
 import Footer from "../../../components/layout/Footer/Footer.jsx";
+import Hashtag from "../../../components/features/Hashtag/Hashtag.jsx";
+import PostCard from "../../../components/features/PostCard/PostCard.jsx";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Home.module.css";
 import languages from "../../../utilities/constants/languages.js";
@@ -20,6 +22,8 @@ function Home() {
             <Header />
 
             <main className={styles.main}>
+                {/* rewrite all classnames in jsx and css files, also spaces and notes for clean code */}
+                {/* key for map (repeat) components */}
                 <CoreSideNavbar />
                 
                 {/* center section homepage */}
@@ -27,52 +31,37 @@ function Home() {
                     <form className={styles.homefeed_sharepost}>
                         <div className={styles.homefeed_sharepost_top}>
                             <div>
-                                <img src="" alt="" />
+                                <img src="" alt="profile" />
                             </div>
                             <div action="">
-                                <textarea name="" id=""></textarea>
+                                <textarea name="" id="" cols="1" rows="6" placeholder="What's on your mind?"></textarea>
                             </div>
                         </div>
                         <div className={styles.homefeed_sharepost_tagbreadcrumb}>
-                            <div>
-                                <span>
-                                    #category1
-                                </span>
-                                <button>
-                                    <i className={icons.xMark}></i>
-                                </button>
-                            </div>
-                            <div>
-                                <span>
-                                    #category2
-                                </span>
-                                <button>
-                                    <i className={icons.xMark}></i>
-                                </button>
-                            </div>
-                            <div>
-                                <span>
-                                    #category3
-                                </span>
-                                <button>
-                                    <i className={icons.xMark}></i>
-                                </button>
-                            </div>
+                            <Hashtag name="category1" />
+                            <Hashtag name="category2" />
+                            <Hashtag name="category3" />
                         </div>
                         <div className={styles.homefeed_sharepost_preferences}>
                             <span>
                                 <i className={icons.media}></i>
                                 <input type="file" name="" id="" />
+                                {/* new input after add one, remove btn for each */}
+                                {/* bulk select and clear buttons */}
                             </span>
                             <span>
                                 <i className={icons.hashtag}></i>
                                 <input type="text" />
+                                <button>add</button>
                             </span>
                             <span>
                                 <div>
                                     <div>
                                         <i className={icons.public}></i>
-                                        <span>public</span>
+                                        <div>
+                                            <span>public</span>
+                                            <i className={icons.chevronDown}></i>
+                                        </div>
                                     </div>
 
                                     <div>
@@ -88,95 +77,58 @@ function Home() {
                                 </div>
                             </span>
                         </div>
+                        <button>post</button>
                     </form>
                     <div className={styles.homefeed_container}>
-                        <div className={styles.postcard}>
-                            <div className={styles.postcard_top}>
-                                </div>
-                                    <div>
-                                        <img src="" alt="photo" />
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <span>John</span>
-                                            <span>Doe</span>
-                                        </div>
-                                        <div>
-                                            <span>
-                                                2h ago
-                                            </span>
-                                            <span>
-                                                •
-                                            </span>
-                                            <span>
-                                                <i className={icons.globe}></i>
-                                                <span>Baku, Azerbaijan</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                <div>
-                                <div>
-                                    <button>
-                                        <i className={icons.threeDots}></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <article className={styles.postcard_content}>
-                                <p>Lorem ipsum dolor sit amet.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt.</p>
-                                <p>Lorem, ipsum.</p>
-                            </article>
-                            <div className={styles.postcard_tags}>
-                                <span>#nature</span>
-                                <span>#travel</span>
-                                <span>#adventure</span>
-                            </div>
-                            <div className={styles.postcard_medias}>
-                                <span>1/3</span>
-
-                                <div>
-                                    <img src="" alt="image" />
-                                </div>
-                                <div>
-                                    <img src="" alt="image" />
-                                </div>
-                                <div>
-                                    <img src="" alt="image" />
-                                </div>
-
-                                <button>
-                                    ◄
-                                </button>
-                                <button>
-                                    ►
-                                </button>
-                            </div>
-                            <div className={styles.postcard_features}>
-                                <div>
-                                    <button>
-                                        <span>123k</span>
-                                        <i className={icons.like}></i>
-                                        <span>like</span>
-                                    </button>
-                                    <button>
-                                        <span>999</span>
-                                        <i className={icons.dislike}></i>
-                                        <span>dislike</span>
-                                    </button>
-                                </div>
-                                <div>
-                                    <button>
-                                        <span>0</span>
-                                        <i className={icons.comments}></i>
-                                        <span>comments</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <PostCard data={{
+                            photo: "image_url",
+                            firstname: "Lorem",
+                            lastname: "Ipsum",
+                            date: "2026/05/08_16:21",
+                            city: "Baku",
+                            country: "Azerbaijan",
+                            textContent: "...",
+                            tags: ["a", "b", "c"],
+                            media: "",
+                            likes: 20,
+                            dislikes: 999,
+                            commentsCount: 1002
+                        }} />
+                        <PostCard data={{
+                            photo: "image_url",
+                            firstname: "John",
+                            lastname: "Doe",
+                            date: "2026/05/08_16:21",
+                            city: "Ankara",
+                            country: "Turkey",
+                            textContent: "Donde esta la biblioteka ?",
+                            tags: ["awdawd", "wweee", "sss1"],
+                            media: "",
+                            likes: 10000,
+                            dislikes: 50,
+                            commentsCount: 340
+                        }} />
+                        <PostCard data={{
+                            photo: "image_url",
+                            firstname: "Someone",
+                            lastname: "Else",
+                            date: "2026/05/08_16:21",
+                            city: "Washington",
+                            country: "USA",
+                            textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt. \n Lorem, ipsum.`,
+                            tags: ["tag1", "tag2", "tag3"],
+                            media: "",
+                            likes: 10,
+                            dislikes: 0,
+                            commentsCount: 0
+                        }} />
                     </div>
                     <div className={styles.homefeed_loading}>
+                        <span>
+                            {/* loading more posts... */}
+                            load more
+                        </span>
                         <i className={icons.reload}></i>
-                        <span>loading more posts...</span>
                     </div>
                 </section>
 

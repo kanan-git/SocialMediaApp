@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../../assets/logo/logo.svg";
+import Logo from "../../../assets/logo/logo.png";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Footer.module.css";
 import languages from "../../../utilities/constants/languages.js";
