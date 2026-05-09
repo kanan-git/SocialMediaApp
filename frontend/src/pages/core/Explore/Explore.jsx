@@ -17,19 +17,14 @@ function Explore() {
                 <section className={styles.explore}>
                     {/* center section explore */}
                     <div className={styles.explore_top}>
-                        <h1>
-                            explore
-                        </h1>
-                        <div>
-                            <span>"John Doe" search results (99):</span>
-                        </div>
+                        <h1 className={styles.explore_top_header}>explore</h1>
+                        <span className={styles.explore_top_info}>"John Doe" search results (99):</span>
                     </div>
                     <div className={styles.explore_preferences}>
-                        <button>all</button>
-                        <button>people</button>
-                        <button>posts</button>
-                        <button>hashtags</button>
-                        <button>trending</button>
+                        <button className={styles.explore_preferences_option}>all</button>
+                        <button className={styles.explore_preferences_option}>people</button>
+                        <button className={styles.explore_preferences_option}>posts</button>
+                        <button className={styles.explore_preferences_option}>hashtags</button>
                     </div>
                     <div className={styles.explore_container}>
                         {/* postcards here */}

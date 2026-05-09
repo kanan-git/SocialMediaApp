@@ -1,4 +1,28 @@
-/*  */
+.main {
+    display: flex;
+    background-color: #ffffff;
+    gap: 5rem;
+    width: 100%;
+    min-height: calc(100vh - 3rem);
+}
+
+.explore {
+    width: 50%;
+    background: transparent;
+    padding: 1rem 0;
+}
+
+.explore_top {}
+
+.explore_top_header {}
+
+.explore_top_info {}
+
+.explore_preferences {}
+
+.explore_preferences_option {}
+
+.explore_container {}
 
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */
