@@ -7,6 +7,10 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./About.module.css";
 
 function About() {
+    useEffect(() => {
+        document.title = "About";
+    }, []);
+    
     return (
         <>
             <Header />
@@ -16,13 +20,13 @@ function About() {
 
                 <section className={styles.about}>
                     {/* center section about */}
-                    <h1>about</h1>
-                    <div>
+                    <h1 className={styles.about_header}>about</h1>
+                    <div className={styles.about_cover}>
                         <div>
                             <div>
                                 <img src="" alt="image" />
                             </div>
-                            <h1>socialmediaapp</h1>
+                            <h2>SocialMediaApp</h2>
                         </div>
                         <article>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate a quidem delectus labore! Hic quaerat tempore magni aut reprehenderit cumque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, neque animi distinctio eius laborum nulla. Possimus ducimus accusantium repellat velit, beatae veniam sit omnis sint numquam, dicta necessitatibus magni corrupti.</p>
@@ -30,7 +34,7 @@ function About() {
                             <p>Lorem ipsum dolor sit amet.</p>
                         </article>
                     </div>
-                    <div>
+                    <div className={styles.about_info}>
                         <div>
                             <div>
                                 <i className={icons.aboutUsers}></i>
@@ -53,12 +57,13 @@ function About() {
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos odit, unde nihil debitis impedit esse facere blanditiis ipsa cum tenetur aperiam. Cum recusandae dicta vero ab! Aliquam molestias officia, necessitatibus ea blanditiis provident excepturi molestiae</p>
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.about_stats}>
                         <div>
                             <div>
                                 <strong>514</strong>
                                 <span>users</span>
                             </div>
+                            <hr />
                             <div>
                                 <strong>70</strong>
                                 <span>countries</span>
@@ -69,6 +74,7 @@ function About() {
                                 <strong>5.5M</strong>
                                 <span>comments</span>
                             </div>
+                            <hr />
                             <div>
                                 <strong>1M</strong>
                                 <span>posts</span>

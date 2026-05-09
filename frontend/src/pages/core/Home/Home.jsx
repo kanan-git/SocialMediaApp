@@ -15,7 +15,7 @@ function Home() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        // 
+        document.title = "Home";
     }, []);
 
     return (

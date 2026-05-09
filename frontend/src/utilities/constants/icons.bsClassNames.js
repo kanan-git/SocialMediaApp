@@ -18,7 +18,7 @@ const bootstrapIcons = {
     receivedMessage: "bi bi-check2-all",
 
     aboutUsers: "bi bi-person-circle",
-    aboutPosts: "bi bi-file-emark-image",
+    aboutPosts: "bi bi-file-earmark-image",
     aboutChats: "bi bi-chat-square-dots",
 
     statistic: "bi bi-graph-up-arrow",

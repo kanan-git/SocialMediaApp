@@ -1,4 +1,180 @@
-/*  */
+.main {
+    display: flex;
+    background-color: #ffffff;
+    gap: 5rem;
+    width: 100%;
+    min-height: calc(100vh - 3rem);
+}
+
+.profile {
+    width: 50%;
+    background: transparent;
+    padding: 1rem 0;
+}
+
+.profile_main {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile_main_cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10rem;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.profile_main_cover > img {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+
+.profile_main_credentials {
+    display: flex;
+    position: relative;
+    padding: 1rem 0;
+}
+
+.profile_main_credentials > div:first-of-type {
+    position: absolute;
+    top: -3rem;
+    left: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile_main_credentials > div:first-of-type > img {
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+}
+
+.profile_main_credentials > div:last-of-type {
+    padding-left: 12rem;
+}
+
+.profile_main_credentials > div:last-of-type > h2 {
+    text-transform: capitalize;
+}
+
+.profile_main_credentials > div:last-of-type > p {
+    padding: 0.25rem 0;
+}
+
+.profile_main_credentials > div:last-of-type > div {
+    color: black;
+}
+
+.profile_main_credentials > div:last-of-type > div > i {
+    color: black;
+}
+
+.profile_main_credentials > div:last-of-type > div > span {
+    color: black;
+}
+
+.profile_main_bio {
+    padding: 0 1rem;
+}
+
+.profile_main_bio > p {
+    color: black;
+}
+
+.profile_main_bio > span {
+    padding-right: 0.5rem;
+}
+
+.profile_main_statistics {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.profile_main_statistics > div:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid black;
+}
+
+.profile_main_statistics > div:first-of-type > i {
+    font-size: 2rem;
+}
+
+.profile_main_statistics > div:last-of-type {
+    display: flex;
+    gap: 1rem;
+}
+
+.profile_main_statistics > div:last-of-type > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile_main_statistics > div:last-of-type > div > b {
+    font-size: 1.5rem;
+}
+
+.profile_main_statistics > div:last-of-type > div > p {
+    text-transform: capitalize;
+}
+
+.profile_main_cta {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 1rem 0;
+}
+
+.profile_main_cta > button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.profile_main_cta > button > i {
+    font-size: 1rem;
+}
+
+.profile_main_cta > button > span {
+    text-transform: capitalize;
+}
+
+.profile_navbar {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0 1rem;
+}
+
+.profile_navbar > button {
+    text-transform: capitalize;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #303030;
+    border-radius: 0.25rem;
+}
+
+.profile_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #ffffff;
+}
 
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */

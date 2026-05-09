@@ -1,4 +1,106 @@
-/*  */
+.main {
+    display: flex;
+    background-color: #ffffff;
+    gap: 5rem;
+    width: 100%;
+    min-height: calc(100vh - 3rem);
+}
+
+.contact {
+    width: 50%;
+    background: transparent;
+    padding: 1rem 0;
+}
+
+.contact > h1 {
+    text-transform: uppercase;
+    padding: 1rem;
+}
+
+.contact > div:first-of-type {
+    width: 100%;
+    height: 20rem;
+    background-color: azure;
+    border: 1px solid black;
+}
+
+.contact > div:last-of-type {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact > div:last-of-type > form {
+    padding: 1rem;
+}
+
+.contact > div:last-of-type > form > h2 {
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.contact > div:last-of-type > form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact > div:last-of-type > form > div > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.contact > div:last-of-type > form > div > div > label {
+    text-transform: capitalize;
+    font-weight: 900;
+}
+
+.contact > div:last-of-type > form > div > div > input {
+    border: 1px solid black;
+    width: 20rem;
+    padding: 0.5rem 1rem;
+}
+
+.contact > div:last-of-type > form > div > div > textarea {
+    border: 1px solid black;
+    width: 20rem;
+    padding: 0.5rem 1rem;
+}
+
+.contact > div:last-of-type > form > div > button {
+    width: 100%;
+    padding: 0.5rem 0;
+    border: 1px solid black;
+    text-transform: capitalize;
+}
+
+.contact > div:last-of-type > div {
+    padding: 1rem;
+}
+
+.contact > div:last-of-type > div > h2 {
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.contact > div:last-of-type > div > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact > div:last-of-type > div > ul > li {
+    display: flex;
+    gap: 1rem;
+}
+
+.contact > div:last-of-type > div > ul > li > i {
+    color: black;
+}
+
+.contact > div:last-of-type > div > ul > li > span {
+    color: black;
+}
 
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */

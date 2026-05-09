@@ -12,17 +12,38 @@
     padding: 1rem 0;
 }
 
-.explore_top {}
+.explore_top {
+    padding: 1rem;
+}
 
-.explore_top_header {}
+.explore_top_header {
+    text-transform: uppercase;
+}
 
-.explore_top_info {}
+.explore_top_info {
+    color: #303030;
+}
 
-.explore_preferences {}
+.explore_preferences {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0 1rem;
+}
 
-.explore_preferences_option {}
+.explore_preferences_option {
+    text-transform: capitalize;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #303030;
+    border-radius: 0.25rem;
+}
 
-.explore_container {}
+.explore_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #ffffff;
+}
 
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */

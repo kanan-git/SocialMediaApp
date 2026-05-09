@@ -7,6 +7,10 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Profile.module.css";
 
 function Profile() {
+    useEffect(() => {
+        document.title = "Profile";
+    }, []);
+
     return (
         <>
             <Header />
@@ -17,10 +21,10 @@ function Profile() {
                 <section className={styles.profile}>
                     {/* center section profile */}
                     <div className={styles.profile_main}>
-                        <div>
+                        <div className={styles.profile_main_cover}>
                             <img src="" alt="cover" />
                         </div>
-                        <div>
+                        <div className={styles.profile_main_credentials}>
                             <div>
                                 <img src="" alt="profile" />
                             </div>
@@ -33,15 +37,15 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
-                        <article>
-                            <span>
+                        <article className={styles.profile_main_bio}>
+                            <p>
                                 Bio. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi beatae eos facere ab, tempore quis.
-                            </span>
+                            </p>
                             <span>#hashtag1</span>
                             <span>#hashtag2</span>
                             <span>#hashtag3</span>
                         </article>
-                        <div>
+                        <div className={styles.profile_main_statistics}>
                             <div>
                                 <i className={icons.statistic}></i>
                             </div>
@@ -64,11 +68,11 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <button>
+                        <div className={styles.profile_main_cta}>
+                            {/* <button>
                                 <i className={icons.editProfile}></i>
                                 <span>edit profile</span>
-                            </button>
+                            </button> */}
                             <button>
                                 <i className={icons.sendMessageTo}></i>
                                 <span>message</span>
