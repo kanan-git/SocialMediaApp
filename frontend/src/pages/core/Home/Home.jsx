@@ -12,6 +12,7 @@ import languages from "../../../utilities/constants/languages.js";
 
 function Home() {
     const navigate = useNavigate();
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         // 
@@ -22,8 +23,6 @@ function Home() {
             <Header />
 
             <main className={styles.main}>
-                {/* rewrite all classnames in jsx and css files, also spaces and notes for clean code */}
-                {/* key for map (repeat) components */}
                 <CoreSideNavbar />
                 
                 {/* center section homepage */}
@@ -33,7 +32,7 @@ function Home() {
                             <div>
                                 <img src="" alt="profile" />
                             </div>
-                            <div action="">
+                            <div>
                                 <textarea name="" id="" cols="1" rows="6" placeholder="What's on your mind?"></textarea>
                             </div>
                         </div>
@@ -46,8 +45,6 @@ function Home() {
                             <span>
                                 <i className={icons.media}></i>
                                 <input type="file" name="" id="" />
-                                {/* new input after add one, remove btn for each */}
-                                {/* bulk select and clear buttons */}
                             </span>
                             <span>
                                 <i className={icons.hashtag}></i>
