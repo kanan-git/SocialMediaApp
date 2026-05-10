@@ -3,6 +3,7 @@ import Header from "../../../components/layout/Header/Header.jsx";
 import CoreSideNavbar from "../../../components/layout/CoreSideNavbar/CoreSideNavbar.jsx";
 import CoreSideDiscover from "../../../components/layout/CoreSideDiscover/CoreSideDiscover.jsx";
 import Footer from "../../../components/layout/Footer/Footer.jsx";
+import DMCard from "../../../components/features/DMCard/DMCard.jsx";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Messages.module.css";
 
@@ -26,48 +27,38 @@ function Messages() {
                         </div>
                     </div>
                     <div className={styles.messages_container}>
-                        <div className={styles.dmcard}>
-                            <div>
-                                <div>
-                                    <img src="" alt="photo" />
-                                </div>
-                                <div>
-                                    <p>John Doe</p>
-                                    <span>you conditional: last message</span>
-                                </div>
-                            </div>
-                            <div>
-                                <span>3</span>
-                            </div>
-                        </div>
-                        <div className={styles.dmcard}>
-                            <div>
-                                <div>
-                                    <img src="" alt="photo" />
-                                </div>
-                                <div>
-                                    <p>John Doe</p>
-                                    <span>you conditional: last message</span>
-                                </div>
-                            </div>
-                            <div>
-                                <span>3</span>
-                            </div>
-                        </div>
-                        <div className={styles.dmcard}>
-                            <div>
-                                <div>
-                                    <img src="" alt="photo" />
-                                </div>
-                                <div>
-                                    <p>John Doe</p>
-                                    <span>you conditional: last message</span>
-                                </div>
-                            </div>
-                            <div>
-                                <span>3</span>
-                            </div>
-                        </div>
+                        <DMCard data={{
+                            imgPath: "",
+                            firstName: "Lorem",
+                            lastName: "Ipsum",
+                            lastMessage: "awui awgsefdpiu baw",
+                            isLastMe: true,
+                            unreadMessagesCounter: 0
+                        }} />
+                        <DMCard data={{
+                            imgPath: "",
+                            firstName: "John",
+                            lastName: "Doe",
+                            lastMessage: "123 oaoaoaoaoaoaoaoaoa 123 oaoaoaoaoaoaoaoaoa",
+                            isLastMe: false,
+                            unreadMessagesCounter: 999
+                        }} />
+                        <DMCard data={{
+                            imgPath: "",
+                            firstName: "Qwerty",
+                            lastName: "Uiop",
+                            lastMessage: "00000",
+                            isLastMe: true,
+                            unreadMessagesCounter: 0
+                        }} />
+                        <DMCard data={{
+                            imgPath: "",
+                            firstName: "Unnamed",
+                            lastName: "User",
+                            lastMessage: "--------",
+                            isLastMe: false,
+                            unreadMessagesCounter: 3
+                        }} />
                         {/* open chat on right side over discovery or replace */}
                     </div>
                 </section>

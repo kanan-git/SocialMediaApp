@@ -1,7 +1,7 @@
 .peoplecard {
+    position: relative;
     border: 1px solid black;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
     cursor: pointer;
@@ -17,6 +17,7 @@
     border: 1px solid black;
     border-radius: 1.5rem;
     overflow: hidden;
+    margin-right: 1rem;
 }
 
 .peoplecard > div:nth-of-type(1) > img {
@@ -44,6 +45,8 @@
 .peoplecard > div:nth-of-type(3) {
     display: flex;
     gap: 1rem;
+    position: absolute;
+    right: 0.5rem;
 }
 
 .peoplecard > div:nth-of-type(3) > button {

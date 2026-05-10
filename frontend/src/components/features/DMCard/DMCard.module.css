@@ -1,0 +1,75 @@
+.dmcard {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.dmcard > div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dmcard > div:first-of-type > div:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.dmcard > div:first-of-type > div:first-of-type > img {
+    background-color: chartreuse;
+    width: auto;
+    height: 100%;
+}
+
+.dmcard > div:first-of-type > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dmcard > div:first-of-type > div:last-of-type > p {
+    font-weight: 900;
+}
+
+.dmcard > div:first-of-type > div:last-of-type > span {
+    font-style: italic;
+    color: gray;
+}
+
+.dmcard > div:last-of-type {
+    width: fit-content;
+}
+
+.dmcard > div:last-of-type > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    width: fit-content;
+    min-width: 2rem;
+    background-color: red;
+    color: white;
+    border-radius: 2rem;
+}
+
+@media only screen and (max-width: var(--laptop-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--tablet-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--mobile-width)) {
+    /*  */
+}

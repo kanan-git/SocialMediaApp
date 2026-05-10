@@ -1,4 +1,64 @@
-/*  */
+.main {
+    display: flex;
+    background-color: #ffffff;
+    gap: 5rem;
+    width: 100%;
+    min-height: calc(100vh - 3rem);
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.settings > h1 {
+    text-transform: uppercase;
+    padding: 1rem;
+}
+
+.settings > form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.settings > form > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings > form > div:not(:last-of-type) > span {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings > form > div > span > label {
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.settings > form > div > span > input {
+    padding: 0.5rem 1rem;
+}
+
+.settings > form > div > span > select {
+    padding: 0.5rem 1rem;
+}
+
+.settings > form > div > span > select > option {
+    background-color: red;
+}
+
+.settings > form > div:last-of-type > span:first-of-type {
+    display: flex;
+    gap: 1rem;
+}
+
+.settings > form > div > span > button {
+    padding: 0.5rem 1rem;
+    text-transform: capitalize;
+}
 
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */
