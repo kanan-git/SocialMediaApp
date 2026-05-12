@@ -5,6 +5,10 @@
     width: 100%;
     border-top: 1px solid black;
 }
+.container {
+    width: min(1920px, 100%);
+    margin: 0 auto;
+}
 .top {
     display: flex;
     padding-bottom: 1rem;

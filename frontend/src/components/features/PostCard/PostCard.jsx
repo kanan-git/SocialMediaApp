@@ -38,10 +38,10 @@ function PostCard(prop) {
                 </div>
             </div>
             <article className={styles.postcard_content}>
-                {prop.data.textContent.split("\n").map(p => {return <p>{p}</p>})}
+                {prop.data.textContent.split("\n").map((p, i) => {return <p key={"paragraph_"+i}>{p}</p>})}
             </article>
             <div className={styles.postcard_tags}>
-                {prop.data.tags.map(t => {return <Link to={`/explore?tag=${t}`}>#{t}</Link>})}
+                {prop.data.tags.map((t, i) => {return <Link key={"link_"+i} to={`/explore?tag=${t}`}>#{t}</Link>})}
             </div>
             {/* carousel if multiple media, no buttons if there is only one, no section if no match for media */}
             {/* <div className={styles.postcard_medias}>

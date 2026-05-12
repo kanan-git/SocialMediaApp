@@ -3,26 +3,54 @@
     margin: 0;
     padding: 0;
 }
-
 * {
     scrollbar-width: thin;
     scroll-behavior: smooth;
     scrollbar-color: #6607ff #ffffff;
 }
-
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
-
 ul, ol, li {
     list-style: none;
 }
-
 a {
     color: #000000;
     text-decoration: none;
 }
-
 button {
     cursor: pointer;
+}
+
+.main {
+    display: flex;
+    background-color: #ffffff;
+    gap: 5rem;
+    width: min(1920px, 100%);
+    margin: 0 auto;
+    min-height: calc(100vh - 3rem);
+}
+.main_container {
+    width: 50%;
+    background: transparent;
+    padding: 1rem 0;
+}
+.cardcontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #ffffff;
+}
+
+@media only screen and (max-width: var(--laptop-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--tablet-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--mobile-width)) {
+    /*  */
 }

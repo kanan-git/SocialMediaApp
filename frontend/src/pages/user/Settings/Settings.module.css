@@ -1,17 +1,3 @@
-.main {
-    display: flex;
-    background-color: #ffffff;
-    gap: 5rem;
-    width: 100%;
-    min-height: calc(100vh - 3rem);
-}
-
-.settings {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
 .settings > h1 {
     text-transform: uppercase;
     padding: 1rem;
@@ -44,10 +30,16 @@
 
 .settings > form > div > span > select {
     padding: 0.5rem 1rem;
+    text-transform: capitalize;
 }
 
 .settings > form > div > span > select > option {
     background-color: red;
+    text-transform: capitalize;
+}
+
+.settings > form > div > span > select > option[value=false] {
+    display: none;
 }
 
 .settings > form > div:last-of-type > span:first-of-type {
