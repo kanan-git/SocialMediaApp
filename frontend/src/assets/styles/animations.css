@@ -1,7 +1,11 @@
 /*  */
-@keyframes untitled1 {
-    0% {}
-    100% {}
+@keyframes spin {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: -360deg;
+    }
 }
 
 /*  */

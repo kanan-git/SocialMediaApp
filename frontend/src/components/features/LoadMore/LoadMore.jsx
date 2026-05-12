@@ -4,14 +4,24 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./LoadMore.module.css";
 import languages from "../../../utilities/constants/languages.js";
 
-function LoadMore() {
+function LoadMore( {onclick} ) {
+    const [loading, setLoading] = useState(false);
+
+    function activateLoading() {
+        setLoading(true);
+        onclick();
+        // setTimeout(() => {
+            // async function
+            setLoading(false);
+        // }, 3000);
+    };
+    
     return (
-        <div className={styles.loadmore}>
+        <div className={styles.loadmore} onClick={activateLoading}>
             <span>
-                {/* loading more posts... */}
-                load more
+                {loading ? "loading more posts..." : "load more"}
             </span>
-            <i className={icons.reload}></i>
+            <i className={`${icons.reload} ${loading ? styles.loading : null}`}></i>
         </div>
     );
 };

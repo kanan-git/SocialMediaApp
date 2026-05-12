@@ -8,7 +8,7 @@ function PostCard(prop) {
     return (
         <div className={styles.postcard}>
             <div className={styles.postcard_top}>
-                <div>
+                <Link to={"/profile?u="+prop.data.username}>
                     <div>
                         <img src={`${prop.data.photo}`} alt="photo" />
                     </div>
@@ -30,7 +30,7 @@ function PostCard(prop) {
                             </span>
                         </div>
                     </div>
-                </div>
+                </Link>
                 <div>
                     <button>
                         <i className={icons.threeDots}></i>

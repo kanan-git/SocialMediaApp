@@ -67,7 +67,7 @@ function Notifications() {
             <div className="cardcontainer">
                 {loading && <span>loading...</span>}
                 
-                {notifications.length && notifications.map((n, i) => {return (<NotificationCard imgPath={n.imgPath} firstName={n.firstName} lastName={n.lastName} icon={n.icon} notification={n.notification} time={n.time} key={`notificationcard_${i}`} />)})}
+                {notifications.length > 0 ? notifications.map((n, i) => {return (<NotificationCard imgPath={n.imgPath} firstName={n.firstName} lastName={n.lastName} icon={n.icon} notification={n.notification} time={n.time} key={`notificationcard_${i}`} />)}) : <h3>you have not any notification</h3>}
             </div>
         </section>
     );

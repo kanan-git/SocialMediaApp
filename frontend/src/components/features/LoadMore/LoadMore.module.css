@@ -1,3 +1,5 @@
+@import "../../../assets/styles/animations.css";
+
 .loadmore {
     display: flex;
     justify-content: center;
@@ -6,6 +8,10 @@
     width: 100%;
     background-color: #f3f3f3;
     cursor: pointer;
+}
+
+.loading {
+    animation: spin var(--very-slow) var(--linear) 0s infinite;
 }
 
 @media only screen and (max-width: var(--laptop-width)) {

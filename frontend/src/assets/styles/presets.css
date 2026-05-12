@@ -20,6 +20,13 @@
     --thin: 1px;
     --thick: 3px;
 
+    /* DURATION */
+    --very-fast: 150ms;
+    --fast: 250ms;
+    --medium: 300ms;
+    --slow: 500ms;
+    --very-slow: 1000ms;
+
     /* ANIMATION */
     --linear: linear;
     --ease-in: ease-in;

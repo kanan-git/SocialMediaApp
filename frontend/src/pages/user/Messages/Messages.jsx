@@ -63,7 +63,8 @@ function Messages() {
                 </div>
             </div>
             <div className="cardcontainer">
-                {!loading && chats.length && chats.map((c, i) => {return (<DMCard data={c} key={`dmcard_${i}`} />)})}
+                {!loading && chats.length > 0 && chats.map((c, i) => {return (<DMCard data={c} key={`dmcard_${i}`} />)})}
+                {chats.length == 0 && <h3>no chat found</h3>}
                 {/* open chat on right side over discovery or replace */}
             </div>
         </section>

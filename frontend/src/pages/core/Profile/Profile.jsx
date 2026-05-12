@@ -5,8 +5,83 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Profile.module.css";
 
 function Profile() {
+    const [searchParams, setSearchParams] = useState("");
+    const [posts, setPosts] = useState([]);
+    
+    function loadPosts() {
+        const tempFakeData = [
+            {
+                photo: "image_url",
+                firstname: "Lorem",
+                lastname: "Ipsum",
+                username: "awdawcdaw",
+                date: "2026/05/08_16:21",
+                city: "Baku",
+                country: "Azerbaijan",
+                textContent: "...",
+                tags: ["a", "b", "c"],
+                media: "",
+                likes: 20,
+                dislikes: 999,
+                commentsCount: 1002
+            },
+            {
+                photo: "image_url",
+                firstname: "John",
+                lastname: "Doe",
+                username: "awc8dyaouwbdc",
+                date: "2026/05/08_16:21",
+                city: "Ankara",
+                country: "Turkey",
+                textContent: "Donde esta la biblioteka ?",
+                tags: ["awdawd", "wweee", "sss1"],
+                media: "",
+                likes: 10000,
+                dislikes: 50,
+                commentsCount: 340
+            },
+            {
+                photo: "image_url",
+                firstname: "Someone",
+                lastname: "Else",
+                username: "123123123123123",
+                date: "2026/05/08_16:21",
+                city: "Washington",
+                country: "USA",
+                textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt. \n Lorem, ipsum.`,
+                tags: ["tag1", "tag2", "tag3"],
+                media: "",
+                likes: 10,
+                dislikes: 0,
+                commentsCount: 0
+            }
+        ];
+        setPosts(tempFakeData);
+    };
+    function loadMorePosts() {
+        const tempFakePageTwoData = [
+            {
+                photo: "image_url",
+                firstname: "Simeon22",
+                lastname: "Olsen22",
+                username: "eeeeeeeeeeeeeeee1",
+                date: "2026/05/08_16:21",
+                city: "Instanbul",
+                country: "Turkey",
+                textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet.`,
+                tags: ["tag1111", "tag2222", "tag3333"],
+                media: "",
+                likes: 999999,
+                dislikes: 123,
+                commentsCount: 80
+            }
+        ];
+        setPosts(prev => [...prev, ...tempFakePageTwoData]);
+    };
+
     useEffect(() => {
         document.title = "Profile";
+        loadPosts();
     }, []);
 
     return (
@@ -78,50 +153,9 @@ function Profile() {
             </div>
             <div className="cardcontainer">
                 {/* cards, own posts, own comments */}
-                <PostCard key={`postcard_${0}`} data={{
-                    photo: "image_url",
-                    firstname: "Lorem",
-                    lastname: "Ipsum",
-                    date: "2026/05/08_16:21",
-                    city: "Baku",
-                    country: "Azerbaijan",
-                    textContent: "...",
-                    tags: ["a", "b", "c"],
-                    media: "",
-                    likes: 20,
-                    dislikes: 999,
-                    commentsCount: 1002
-                }} />
-                <PostCard key={`postcard_${1}`} data={{
-                    photo: "image_url",
-                    firstname: "John",
-                    lastname: "Doe",
-                    date: "2026/05/08_16:21",
-                    city: "Ankara",
-                    country: "Turkey",
-                    textContent: "Donde esta la biblioteka ?",
-                    tags: ["awdawd", "wweee", "sss1"],
-                    media: "",
-                    likes: 10000,
-                    dislikes: 50,
-                    commentsCount: 340
-                }} />
-                <PostCard key={`postcard_${2}`} data={{
-                    photo: "image_url",
-                    firstname: "Someone",
-                    lastname: "Else",
-                    date: "2026/05/08_16:21",
-                    city: "Washington",
-                    country: "USA",
-                    textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt. \n Lorem, ipsum.`,
-                    tags: ["tag1", "tag2", "tag3"],
-                    media: "",
-                    likes: 10,
-                    dislikes: 0,
-                    commentsCount: 0
-                }} />
+                {posts.length > 0 ? posts.map((p,i) => {return (<PostCard key={`postcard_${i}`} data={p} />)}) : <h3>empty</h3>}
             </div>
-            <LoadMore />
+            {posts.length > 0 && <LoadMore onclick={loadMorePosts} />}
         </section>
     );
 };
