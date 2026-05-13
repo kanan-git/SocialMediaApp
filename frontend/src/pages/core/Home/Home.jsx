@@ -20,6 +20,7 @@ function Home() {
     function loadPosts() {
         const tempFakeData = [
             {
+                id: 0,
                 photo: "image_url",
                 firstname: "Lorem",
                 lastname: "Ipsum",
@@ -29,12 +30,13 @@ function Home() {
                 country: "Azerbaijan",
                 textContent: "...",
                 tags: ["a", "b", "c"],
-                media: "",
+                media: [],
                 likes: 20,
                 dislikes: 999,
                 commentsCount: 1002
             },
             {
+                id: 1,
                 photo: "image_url",
                 firstname: "John",
                 lastname: "Doe",
@@ -44,12 +46,13 @@ function Home() {
                 country: "Turkey",
                 textContent: "Donde esta la biblioteka ?",
                 tags: ["awdawd", "wweee", "sss1"],
-                media: "",
+                media: ["a", "b"],
                 likes: 10000,
                 dislikes: 50,
                 commentsCount: 340
             },
             {
+                id: 2,
                 photo: "image_url",
                 firstname: "Someone",
                 lastname: "Else",
@@ -59,7 +62,7 @@ function Home() {
                 country: "USA",
                 textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt. \n Lorem, ipsum.`,
                 tags: ["tag1", "tag2", "tag3"],
-                media: "",
+                media: ["a", "b", "3", "4", "cccc", "dddd", "77", "awdaw888", "9th", "final_one"],
                 likes: 10,
                 dislikes: 0,
                 commentsCount: 0
@@ -70,6 +73,7 @@ function Home() {
     function loadMorePosts() {
         const tempFakePageTwoData = [
             {
+                id: 3,
                 photo: "image_url",
                 firstname: "Simeon22",
                 lastname: "Olsen22",
@@ -79,7 +83,7 @@ function Home() {
                 country: "Turkey",
                 textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet.`,
                 tags: ["tag1111", "tag2222", "tag3333"],
-                media: "",
+                media: ["aaaaaa1"],
                 likes: 999999,
                 dislikes: 123,
                 commentsCount: 80
@@ -87,7 +91,8 @@ function Home() {
         ];
         setPosts(prev => [...prev, ...tempFakePageTwoData]);
     };
-    function createPost() {
+    function createPost(e) {
+        e.preventDefault();
         const data = {
             photo: "my_photoUrl",
             firstname: "my_firstname",
