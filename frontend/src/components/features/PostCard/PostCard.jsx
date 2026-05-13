@@ -34,19 +34,24 @@ function PostCard(prop) {
         postCards.forEach(
             (element, index) => {
                 const postCardId = String(element.getAttribute("id")).split("postmedia_")[1];
-                if(postCardId == mediaIndex) {
-                    console.log(`postCardId: ${postCardId} \n mediaIndex: ${mediaIndex} \n index: ${index}`);
-                    console.log(element);
-                    element.style.zIndex = `1`;
-                    element.style.left = `50%`;
-                } else {
-                    element.style.zIndex = `0`;
-                    element.style.left = `${(index*50)+100}%`;
-                    //         x
-                    // 0   1   2   3   4   5   6   7   8   9
-                    //-150-50  50  150 250 350 450 550 650 750
-                    // ?
-                };
+                element.style.zIndex = `${postCardId-mediaIndex==0 ? 1 : 0}`;
+                element.style.left = `${(postCardId-mediaIndex)*100}%`;
+                // if(postCardId == mediaIndex) {
+                //     element.style.zIndex = `1`;
+                //     element.style.left = `0%`;
+                // } else {
+                //     element.style.zIndex = `0`;
+                //     if(postCardId > mediaIndex) {
+                //         element.style.left = `${postCardId-mediaIndex}%`;
+                //     } else if(postCardId < mediaIndex) {
+                //     };
+                //     //         x
+                //     // 0   1   2   3   4   5   6   7   8   9
+                //     //-200-100 0  100 200 ...
+                //     //  postCardId-mediaIndex
+                //     // 0-2 1-2 2-2
+                //     // ?
+                // };
             }
         );
     };

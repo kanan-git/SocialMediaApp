@@ -122,9 +122,9 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: fit-content;
+    width: 100%;
     height: 100%;
-    background-color: red;
+    background-color: white;
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -138,6 +138,7 @@
 }
 
 .postcard_medias > button {
+    z-index: 2;
     position: absolute;
     top: 50%;
     transform: translate(0%, -50%);
