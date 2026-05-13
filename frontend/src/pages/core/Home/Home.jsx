@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoadMore from "../../../components/features/LoadMore/LoadMore.jsx";
 import Hashtag from "../../../components/features/Hashtag/Hashtag.jsx";
 import PostCard from "../../../components/features/PostCard/PostCard.jsx";
+import NewMediaCard from "../../../components/features/NewMediaCard/NewMediaCard.jsx";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Home.module.css";
 import languages from "../../../utilities/constants/languages.js";
@@ -10,7 +11,7 @@ import languages from "../../../utilities/constants/languages.js";
 function Home() {
     const navigate = useNavigate();
     const [textContent, setTextContent] = useState("");
-    const [tags, setTags] = useState(["category1", "category2", "category3"]);
+    const [tags, setTags] = useState([]);
     const [media, setMedia] = useState([]);
     const [error, setError] = useState([]);
     const [searchParams, setSearchParams] = useState("");
@@ -100,6 +101,26 @@ function Home() {
             media: []
         };
     };
+    async function addMediaFile(e) {
+        if(media.length < 10) {
+            if(e.target.value != "") {
+                await setMedia(prev => [...prev, e.target.value]);
+                e.target.value = "";
+            };
+        };
+    };
+    async function addTag(e) {
+        e.preventDefault();
+        console.log();
+        if(tags.length < 3) {
+            const input = document.querySelector("#tag_input");
+            if(input.value != "") {
+                await setTags(prev => [...prev, input.value]);
+                input.value = "";
+            };
+        };
+        console.log(tags);
+    };
 
     useEffect(() => {
         document.title = "Home";
@@ -123,18 +144,24 @@ function Home() {
                         ></textarea>
                     </div>
                 </div>
-                {tags.length && <div className={styles.homefeed_sharepost_tagbreadcrumb}>
-                    {tags.length && tags.map((tag,index) => {return (<Hashtag key={`hashtagcard_${index}`} name={tag} />)})}
+                {tags.length>0 && <div className={styles.homefeed_sharepost_tagbreadcrumb}>
+                    {tags.length>0 && tags.map((tag,index) => {return (<Hashtag key={`hashtagcard_${index}`} name={tag} index={index} state={setTags} />)})}
                 </div>}
                 <div className={styles.homefeed_sharepost_preferences}>
-                    <span>
-                        <i className={icons.media}></i>
-                        <input type="file" name="" id="" />
-                    </span>
+                    <div>
+                        <div>
+                            <i className={icons.media}></i>
+                            <input type="file" name="file" id="file" onChange={addMediaFile} disabled={media.length==10} />
+                            {media.length>0 && <span>({media.length})</span>}
+                        </div>
+                        <div>
+                            {media.length > 0 && media.map((m,i) => {return(<NewMediaCard key={`mcard_${i}`} value={m} index={i} state={setMedia} />)})}
+                        </div>
+                    </div>
                     <span>
                         <i className={icons.hashtag}></i>
-                        <input type="text" />
-                        <button>add</button>
+                        <input type="text" placeholder={"Add hashtag category "+tags.length+"/3"} id="tag_input" />
+                        <button onClick={addTag} disabled={tags.length==3}>add</button>
                     </span>
                     <span>
                         <div>

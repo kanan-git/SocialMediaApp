@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
-import styles from "./Hashtag.module.css";
+import styles from "./NewMediaCard.module.css";
 import languages from "../../../utilities/constants/languages.js";
 
-function Hashtag( {name, index, state} ) {
-    function removeTag(e) {
+function NewMediaCard( {index, value, state} ) {
+    function removeMediaFile(e) {
         e.preventDefault();
         if(e.target.value != "") {
             state(prev => prev.filter((m,i) => i!=index));
@@ -13,15 +13,13 @@ function Hashtag( {name, index, state} ) {
     };
 
     return (
-        <Link className={styles.hashtag} to={`/explore?tag=${name}`}>
-            <span>
-                #{name}
-            </span>
-            <button onClick={removeTag}>
+        <div className={styles.newmediacard}>
+            <span id={`newmedia_${index}`}>{value}</span>
+            <button onClick={removeMediaFile}>
                 <i className={icons.xMark}></i>
             </button>
-        </Link>
+        </div>
     );
 };
 
-export default Hashtag;
+export default NewMediaCard;

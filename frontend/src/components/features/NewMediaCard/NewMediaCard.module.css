@@ -1,0 +1,38 @@
+.newmediacard {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    background-color: aqua;
+    border: 1px solid black;
+    padding: 0 1rem 0 1rem;
+}
+
+.newmediacard > span {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #00000080;
+}
+
+.newmediacard > button {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.newmediacard > button > i {
+    color: black;
+}
+
+@media only screen and (max-width: var(--laptop-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--tablet-width)) {
+    /*  */
+}
+
+@media only screen and (max-width: var(--mobile-width)) {
+    /*  */
+}

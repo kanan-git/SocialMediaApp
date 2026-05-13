@@ -53,12 +53,15 @@
 .nav {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
     justify-content: space-between;
     margin-left: 10rem;
 }
 .group {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
 }
 .column {
