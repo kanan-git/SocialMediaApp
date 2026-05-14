@@ -7,11 +7,11 @@ import languages from "../../../utilities/constants/languages.js";
 function Modal() {
     return (
         <>
-            <div>
+            <div className={styles.overlay}>
                 {/* overlay with category transparent color */}
             </div>
 
-            <div>
+            <div className={styles.modal}>
                 {/* modal */}
                 <div>
                     <h3>title</h3>

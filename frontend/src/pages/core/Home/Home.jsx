@@ -4,9 +4,13 @@ import LoadMore from "../../../components/features/LoadMore/LoadMore.jsx";
 import Hashtag from "../../../components/features/Hashtag/Hashtag.jsx";
 import PostCard from "../../../components/features/PostCard/PostCard.jsx";
 import NewMediaCard from "../../../components/features/NewMediaCard/NewMediaCard.jsx";
+import { tempFakeFetchPosts, tempFakeLoadMorePosts } from "../../../utilities/main/temp.loadFakeData.js";
 import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Home.module.css";
 import languages from "../../../utilities/constants/languages.js";
+import Modal from "../../../components/ui/Modal/Modal.jsx";
+import Modal from "../../../components/ui/Dropdown/Dropdown.jsx";
+import Modal from "../../../components/ui/Announcement/Announcement.jsx";
 
 function Home() {
     const navigate = useNavigate();
@@ -16,80 +20,19 @@ function Home() {
     const [error, setError] = useState([]);
     const [searchParams, setSearchParams] = useState("");
     const [posts, setPosts] = useState([]);
+    const [lastPostIndex, setLastPostIndex] = useState(0);
 
     function loadPosts() {
-        const tempFakeData = [
-            {
-                id: 0,
-                photo: "image_url",
-                firstname: "Lorem",
-                lastname: "Ipsum",
-                username: "awdawcdaw",
-                date: "2026/05/08_16:21",
-                city: "Baku",
-                country: "Azerbaijan",
-                textContent: "...",
-                tags: ["a", "b", "c"],
-                media: [],
-                likes: 20,
-                dislikes: 999,
-                commentsCount: 1002
-            },
-            {
-                id: 1,
-                photo: "image_url",
-                firstname: "John",
-                lastname: "Doe",
-                username: "awc8dyaouwbdc",
-                date: "2026/05/08_16:21",
-                city: "Ankara",
-                country: "Turkey",
-                textContent: "Donde esta la biblioteka ?",
-                tags: ["awdawd", "wweee", "sss1"],
-                media: ["a", "b"],
-                likes: 10000,
-                dislikes: 50,
-                commentsCount: 340
-            },
-            {
-                id: 2,
-                photo: "image_url",
-                firstname: "Someone",
-                lastname: "Else",
-                username: "123123123123123",
-                date: "2026/05/08_16:21",
-                city: "Washington",
-                country: "USA",
-                textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta aspernatur tempora nostrum quas, porro deserunt. \n Lorem, ipsum.`,
-                tags: ["tag1", "tag2", "tag3"],
-                media: ["a", "b", "3", "4", "cccc", "dddd", "77", "awdaw888", "9th", "final_one"],
-                likes: 10,
-                dislikes: 0,
-                commentsCount: 0
-            }
-        ];
-        setPosts(tempFakeData);
+        const {dataResult, index} = tempFakeFetchPosts(3);
+        setLastPostIndex(index);
+        setPosts(dataResult);
     };
     function loadMorePosts() {
-        const tempFakePageTwoData = [
-            {
-                id: 3,
-                photo: "image_url",
-                firstname: "Simeon22",
-                lastname: "Olsen22",
-                username: "eeeeeeeeeeeeeeee1",
-                date: "2026/05/08_16:21",
-                city: "Instanbul",
-                country: "Turkey",
-                textContent: `Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet. \n Lorem ipsum dolor sit amet.`,
-                tags: ["tag1111", "tag2222", "tag3333"],
-                media: ["aaaaaa1"],
-                likes: 999999,
-                dislikes: 123,
-                commentsCount: 80
-            }
-        ];
-        setPosts(prev => [...prev, ...tempFakePageTwoData]);
+        const {dataResult, index} = tempFakeLoadMorePosts(3, lastPostIndex);
+        if(dataResult.length) {
+            setLastPostIndex(index);
+            setPosts(prev => [...prev, ...dataResult]);
+        };
     };
     function createPost(e) {
         e.preventDefault();
@@ -134,6 +77,10 @@ function Home() {
 
     return (
         <section className="main_container">
+            <Modal />
+            <Dropdown />
+            <Announcement />
+
             {/* center section homepage */}
             <form className={styles.homefeed_sharepost} onSubmit={createPost}>
                 <div className={styles.homefeed_sharepost_top}>
