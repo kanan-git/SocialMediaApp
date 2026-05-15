@@ -71,7 +71,6 @@ function Home() {
                 input.value = "";
             };
         };
-        console.log(tags);
     };
 
     useEffect(() => {
