@@ -4,7 +4,7 @@ import styles from "./AdminPosts.module.css";
 
 function AdminPosts() {
     return (
-        <section className={styles.adminposts}>
+        <section className={"main_container " + styles.adminposts}>
             {/* center section adminposts */}
             {/*  */}
         </section>

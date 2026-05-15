@@ -4,7 +4,7 @@ import styles from "./AdminNotifications.module.css";
 
 function AdminNotifications() {
     return (
-        <section className={styles.adminnotifications}>
+        <section className={"main_container " + styles.adminnotifications}>
             {/* center section adminnotifications */}
             {/*  */}
         </section>

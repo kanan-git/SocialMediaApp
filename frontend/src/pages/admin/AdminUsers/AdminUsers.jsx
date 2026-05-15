@@ -4,7 +4,7 @@ import styles from "./AdminUsers.module.css";
 
 function AdminUsers() {
     return (
-        <section className={styles.adminusers}>
+        <section className={"main_container " + styles.adminusers}>
             {/* center section adminusers */}
             {/*  */}
         </section>

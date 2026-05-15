@@ -43,6 +43,13 @@ button {
     background-color: #ffffff;
 }
 
+.btn {}
+.btn-extrasmall {}
+.btn-small {}
+.btn-medium {}
+.btn-primary {}
+.btn-secondary {}
+
 @media only screen and (max-width: var(--laptop-width)) {
     /*  */
 }

@@ -4,9 +4,12 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Dropdown.module.css";
 import languages from "../../../utilities/constants/languages.js";
 
-function Dropdown() {
+function Dropdown( {state} ) {
     return (
-        <div>
+        <div className={styles.dropdown} onMouseOver={() => {state(true)}} onMouseLeave={() => {state(false)}}>
+            <p>aaaaaaaaaaaa</p>
+            <p>cccccccccccccc</p>
+            <p>ggggggggggggg</p>
         </div>
     );
 };

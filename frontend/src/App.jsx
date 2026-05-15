@@ -82,7 +82,7 @@ function App() {
 			{findPageType(url) != "auth" && <Header />}
 
 			<main className="main">
-				{findPageType(url) != "auth" | findPageType(url) != "admin" && <CoreSideNavbar />}
+				{findPageType(url) != "auth" && findPageType(url) != "admin" && <CoreSideNavbar />}
 				{findPageType(url) == "admin" && <AdminSideNavbar />}
 
 				<Routes>
@@ -118,7 +118,7 @@ function App() {
 					<Route path="*" element={<Navigate to="/error/404" />} />
 				</Routes>
 
-				{findPageType(url) != "auth" | findPageType(url) != "admin" && <CoreSideDiscover />}
+				{findPageType(url) != "auth" && findPageType(url) != "admin" && <CoreSideDiscover />}
 			</main>
 
 			{findPageType(url) != "auth" && <Footer />}

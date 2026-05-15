@@ -9,8 +9,8 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Home.module.css";
 import languages from "../../../utilities/constants/languages.js";
 import Modal from "../../../components/ui/Modal/Modal.jsx";
-import Modal from "../../../components/ui/Dropdown/Dropdown.jsx";
-import Modal from "../../../components/ui/Announcement/Announcement.jsx";
+import Dropdown from "../../../components/ui/Dropdown/Dropdown.jsx";
+import Announcement from "../../../components/ui/Announcement/Announcement.jsx";
 
 function Home() {
     const navigate = useNavigate();
@@ -21,6 +21,10 @@ function Home() {
     const [searchParams, setSearchParams] = useState("");
     const [posts, setPosts] = useState([]);
     const [lastPostIndex, setLastPostIndex] = useState(0);
+
+    const [tempIsModal, setTempIsModal] = useState(false);
+    const [tempIsDropdown, setTempIsDropdown] = useState(false);
+    const [tempIsAnnouncement, setTempIsAnnouncement] = useState(false);
 
     function loadPosts() {
         const {dataResult, index} = tempFakeFetchPosts(3);
@@ -77,9 +81,31 @@ function Home() {
 
     return (
         <section className="main_container">
-            <Modal />
-            <Dropdown />
-            <Announcement />
+            <div style={{background: "linear-gradient(90deg, orange, green)"}}>
+                <div>
+                    <button onClick={() => {setTempIsModal(true)}}>
+                        show modal
+                    </button>
+                    {tempIsModal && <Modal state={setTempIsModal} />}
+                </div>
+                <div style={{position: "relative"}}>
+                    <button onMouseEnter={() => {setTempIsDropdown(true)}} onMouseLeave={() => {setTempIsDropdown(false)}}>
+                        show dropdown
+                    </button>
+                    {tempIsDropdown && <Dropdown state={setTempIsDropdown} />}
+                </div>
+                <div>
+                    <button onClick={() => {
+                        setTempIsAnnouncement(true);
+                        setTimeout(() => {
+                            setTempIsAnnouncement(false);
+                        }, 3000);
+                    }}>
+                        show announcement
+                    </button>
+                    {tempIsAnnouncement && <Announcement state={setTempIsAnnouncement} />}
+                </div>
+            </div>
 
             {/* center section homepage */}
             <form className={styles.homefeed_sharepost} onSubmit={createPost}>

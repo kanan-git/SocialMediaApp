@@ -4,7 +4,7 @@ import styles from "./AdminDashboard.module.css";
 
 function AdminDashboard() {
     return (
-        <section className={styles.admindashboard}>
+        <section className={"main_container " + styles.admindashboard}>
             {/* center section admindashboard */}
             {/*  */}
         </section>

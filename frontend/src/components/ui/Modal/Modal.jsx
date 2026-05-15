@@ -4,7 +4,7 @@ import icons from "../../../utilities/constants/icons.bsClassNames.js";
 import styles from "./Modal.module.css";
 import languages from "../../../utilities/constants/languages.js";
 
-function Modal() {
+function Modal( {state} ) {
     return (
         <>
             <div className={styles.overlay}>
@@ -13,16 +13,18 @@ function Modal() {
 
             <div className={styles.modal}>
                 {/* modal */}
-                <div>
+                <div className={styles.modal_top}>
                     <h3>title</h3>
-                    <button>
+                    <button onClick={() => {state(false)}}>
                         <i className={icons.xMark}></i>
                     </button>
                 </div>
-                <div>
-                    {/* content */}
+                <div className={styles.modal_content}>
+                    {/* content */}aaaaaaaaaaaaaaaaaaaaaa
                 </div>
-                <div>
+                <div className={styles.modal_buttons}>
+                    <button>cancel</button>
+                    <button>save</button>
                     {/* buttons [cancel, save, apply, reset, ok, yes, no, ...] */}
                 </div>
             </div>
